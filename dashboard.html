@@ -25,8 +25,9 @@
   <!-- SheetJS (XLSX Parser) -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-  <!-- Chart.js -->
+  <!-- Chart.js & Chart.js DataLabels Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -232,7 +233,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <h3 class="font-semibold text-white flex items-center gap-2">
               <i data-lucide="activity" class="w-4 h-4 text-blue-400"></i>
-              So Sánh Tiến Độ Các Chỉ Tiêu Vận Hành Theo Tuần
+              So Sánh Tiến Độ Các Chỉ Tiêu Vận Hành Theo Tuần (Đủ 7 Tiêu Chí)
             </h3>
           </div>
           <div class="h-80 relative overflow-x-auto">
@@ -242,7 +243,7 @@
 
         <div class="glass-card rounded-2xl overflow-hidden">
           <div class="p-4 border-b border-slate-800 font-semibold text-sm text-slate-200 flex justify-between items-center">
-            <span>Bảng Chỉ Số Vận Hành </span>
+            <span>Bảng Chỉ Số Vận Hành (7 Tiêu Chí)</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-center text-xs text-slate-300 border-collapse border border-slate-800">
@@ -378,6 +379,9 @@
   </div>
 
   <script>
+    // Đăng ký Plugin DataLabels cho Chart.js
+    Chart.register(ChartDataLabels);
+
     let chartInstances = {};
 
     let gsheetConfig = {
@@ -724,7 +728,7 @@
         }
       }
 
-      // 2. MODUL II: TRIỂN KHAI (LỌC HOÀN TOÀN DÒNG 'TỔNG 340' KHỎI PHẦN NHẬN XÉT)
+      // 2. MODUL II: TRIỂN KHAI
       let tkCols = { stt: -1, pop: -1, weeks: [] };
       for (let r = mod2StartRow; r < mod3StartRow; r++) {
         const row = matrix[r] || [];
@@ -774,7 +778,6 @@
             note: "Đang duy trì"
           });
         } else {
-          // Lọc bỏ triệt để các câu/dòng chứa từ "tổng" hoặc giá trị số tổng như "Tổng 340"
           const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
           const cleanTextLower = noteText.toLowerCase();
 
@@ -1062,6 +1065,7 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
+          datalabels: { display: false },
           legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: 11 } } }
         },
         scales: {
@@ -1105,14 +1109,17 @@
             labels: ['Port Đã Sử Dụng', 'Port Còn Trống'],
             datasets: [{
               data: [totalUsed, totalFree],
-              backgroundColor: ['#f59e0b', '#334155'],
+              backgroundColor: ['#10b981', '#475569'],
               borderWidth: 0
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
+            plugins: {
+              datalabels: { display: false },
+              legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+            }
           }
         });
       }
@@ -1174,6 +1181,7 @@
         });
       }
 
+      // 5. CẤU HÌNH HIỂN THỊ PHẦN TRĂM (%) LÊN 2 NỬA BIỂU ĐỒ TRÒN
       const ctxKtStruct = document.getElementById('khaithacPortStructureChart')?.getContext('2d');
       if (ctxKtStruct && dashboardData.khaithac.items.length > 0) {
         const totalUsed = dashboardData.khaithac.items.reduce((acc, c) => acc + c.used, 0);
@@ -1185,13 +1193,36 @@
             labels: ['Port Sử Dụng', 'Port Trống'],
             datasets: [{
               data: [totalUsed, totalFree],
-              backgroundColor: ['#10b981', '#475569']
+              backgroundColor: ['#10b981', '#475569'],
+              borderWidth: 2,
+              borderColor: '#0f172a'
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
+            plugins: {
+              legend: { 
+                position: 'bottom', 
+                labels: { color: '#94a3b8', font: { family: 'Inter', size: 12 } } 
+              },
+              datalabels: {
+                display: true,
+                color: '#ffffff',
+                font: {
+                  weight: 'bold',
+                  size: 13
+                },
+                formatter: (value, ctx) => {
+                  let sum = 0;
+                  let dataArr = ctx.chart.data.datasets[0].data;
+                  dataArr.map(data => { sum += data; });
+                  if (sum === 0) return '0%';
+                  let percentage = (value * 100 / sum).toFixed(1) + "%";
+                  return percentage;
+                }
+              }
+            }
           }
         });
       }
