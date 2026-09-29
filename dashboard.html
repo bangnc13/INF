@@ -116,7 +116,6 @@
         </div>
       </div>
 
-      <!-- URL Input & Connect Controls -->
       <div class="space-y-2">
         <label class="text-xs font-semibold text-slate-300">Đường dẫn Google Sheet (Spreadsheet URL):</label>
         <div class="flex gap-2">
@@ -128,7 +127,6 @@
         </div>
       </div>
 
-      <!-- Auto Sync Settings -->
       <div class="glass-card p-4 rounded-xl border border-slate-800 space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -152,7 +150,6 @@
         </div>
       </div>
 
-      <!-- Share Permission Checklist Guide -->
       <div class="p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs space-y-1.5 text-blue-200">
         <div class="flex items-center gap-1.5 font-bold text-blue-300">
           <i data-lucide="info" class="w-4 h-4 text-blue-400"></i>
@@ -161,7 +158,7 @@
         <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-300">
           <li>Mở File Google Sheet của bạn.</li>
           <li>Nút <b>Chia sẻ (Share)</b> ở góc phải trên cùng &rarr; Chọn <b>Bất kỳ ai có đường liên kết (Anyone with the link)</b>.</li>
-          <li>Mọi thay đổi số liệu trên Google Sheet sẽ được ứng dụng tự động tải về mà không cần F5!</li>
+          <li>Mọi thay đổi số liệu trên Google Sheet sẽ được ứng dụng tự động tải về!</li>
         </ol>
       </div>
 
@@ -172,8 +169,6 @@
   </div>
 
   <div class="flex-1 flex flex-col overflow-hidden">
-
-    <!-- Main Content Area -->
     <main class="flex-1 overflow-y-auto p-4 lg:p-8 space-y-6">
       
       <!-- Top Horizontal Module Tabs Bar -->
@@ -220,7 +215,7 @@
               <i data-lucide="server" class="w-6 h-6"></i>
             </div>
             <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">RA PORT TRONG THÁNG </p>
-            <h3 id="kpi-total-h20-ports" class="text-3xl font-black text-emerald-400 mt-2">325</h3>
+            <h3 id="kpi-total-h20-ports" class="text-3xl font-black text-emerald-400 mt-2">0</h3>
           </div>
 
           <div class="glass-card p-6 rounded-2xl relative overflow-hidden group border border-amber-500/20">
@@ -228,7 +223,7 @@
               <i data-lucide="pie-chart" class="w-6 h-6"></i>
             </div>
             <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">III: Tỷ Lệ Khai Thác TB</p>
-            <h3 id="kpi-khaithac-avg-rate" class="text-3xl font-black text-amber-400 mt-2">58.4%</h3>
+            <h3 id="kpi-khaithac-avg-rate" class="text-3xl font-black text-amber-400 mt-2">0.0%</h3>
             <div class="mt-3 flex items-center gap-2 text-xs">
               <span id="kpi-khaithac-high-count" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-medium border border-amber-500/20">POPs Khai Thác</span>
             </div>
@@ -292,10 +287,8 @@
           <div class="overflow-x-auto">
             <table class="w-full text-center text-xs text-slate-300 border-collapse border border-slate-800">
               <thead id="thead-vanhanh" class="bg-slate-800/80 text-slate-400 uppercase tracking-wider">
-                <!-- Dynamic Header Row -->
               </thead>
               <tbody id="table-body-vanhanh" class="divide-y divide-slate-800">
-                <!-- Dynamic rows -->
               </tbody>
             </table>
           </div>
@@ -307,7 +300,6 @@
             Nhận Xét & Đánh Giá Vận Hành
           </h4>
           <ul id="vanhanh-notes-list" class="space-y-2 text-xs text-slate-300 list-disc list-inside">
-            <!-- Dynamic notes -->
           </ul>
         </div>
       </section>
@@ -331,10 +323,8 @@
           <div class="overflow-x-auto">
             <table class="w-full text-center text-xs text-slate-300 border-collapse border border-slate-800">
               <thead id="thead-trienkhai" class="bg-slate-800/80 text-slate-400 uppercase tracking-wider">
-                <!-- Dynamic Header Row -->
               </thead>
               <tbody id="table-body-trienkhai" class="divide-y divide-slate-800">
-                <!-- Dynamic rows -->
               </tbody>
             </table>
           </div>
@@ -346,7 +336,6 @@
             Nhận Xét & Đánh Giá Triển Khai
           </h4>
           <ul id="trienkhai-notes-list" class="space-y-2 text-xs text-slate-300 list-disc list-inside">
-            <!-- Dynamic notes -->
           </ul>
         </div>
       </section>
@@ -408,10 +397,8 @@
           <div class="overflow-x-auto max-h-[480px]">
             <table class="w-full text-center text-xs text-slate-300 border-collapse border border-slate-800">
               <thead id="thead-khaithac" class="bg-slate-800/90 text-slate-400 uppercase tracking-wider sticky top-0 backdrop-blur-md">
-                <!-- Dynamic Header Row -->
               </thead>
               <tbody id="table-body-khaithac" class="divide-y divide-slate-800">
-                <!-- Dynamic rows -->
               </tbody>
             </table>
           </div>
@@ -423,7 +410,6 @@
             Nhận Xét & Đánh Giá Khai Thác
           </h4>
           <ul id="khaithac-notes-list" class="space-y-2 text-xs text-slate-300 list-disc list-inside">
-            <!-- Dynamic notes -->
           </ul>
         </div>
       </section>
@@ -473,7 +459,7 @@
     };
 
     let dashboardData = {
-      totalPortH20: 325,
+      totalPortH20: 0,
       vanhanh: {
         headers: ["STT", "Chỉ Tiêu Vận Hành", "26-W46", "26-W47", "26-W48", "26-W49", "Plan", "+ / - Thực Hiện"],
         weekHeaders: ["26-W46", "26-W47", "26-W48", "26-W49"],
@@ -481,7 +467,7 @@
         notes: []
       },
       trienkhai: {
-        headers: ["STT", "Hạng Mục / POP", "26-W46", "26-W47", "26-W48", "26-W49", "Lũy Kế", "Đơn Vị", "Ghi Chú"],
+        headers: ["STT", "Hạng Mục / POP", "26-W46", "26-W47", "26-W48", "26-W49", "Đơn Vị", "Ghi Chú"],
         weekHeaders: ["26-W46", "26-W47", "26-W48", "26-W49"],
         items: [],
         notes: []
@@ -524,33 +510,32 @@
         throw new Error("Đường dẫn Google Sheet không đúng định dạng!");
       }
 
-      const xlsxExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=xlsx&gid=${details.gid}&t=${Date.now()}`;
+      const csvExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=csv&gid=${details.gid}&t=${Date.now()}`;
       try {
-        const response = await fetch(xlsxExportUrl);
+        const response = await fetch(csvExportUrl);
         if (response.ok) {
-          const arrayBuffer = await response.arrayBuffer();
-          if (arrayBuffer && arrayBuffer.byteLength > 100) {
-            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[sheetName];
+          const csvText = await response.text();
+          if (csvText && csvText.trim().length > 0) {
+            const workbook = XLSX.read(csvText, { type: 'string' });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
             const matrix = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
-            return { matrix, rawCsv: JSON.stringify(matrix) };
+            return { matrix, rawCsv: csvText };
           }
         }
       } catch (err) {
-        console.warn("XLSX export failed, fallback to CSV", err);
+        console.warn("CSV export error:", err);
       }
 
-      const csvExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=csv&gid=${details.gid}&t=${Date.now()}`;
-      const response = await fetch(csvExportUrl);
+      const xlsxExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=xlsx&gid=${details.gid}&t=${Date.now()}`;
+      const response = await fetch(xlsxExportUrl);
       if (!response.ok) throw new Error("Không thể truy cập Google Sheet!");
 
-      const csvText = await response.text();
-      const workbook = XLSX.read(csvText, { type: 'string' });
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const arrayBuffer = await response.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
       const matrix = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
-      
-      return { matrix, rawCsv: csvText };
+      return { matrix, rawCsv: JSON.stringify(matrix) };
     }
 
     async function syncGoogleSheetNow(silent = false) {
@@ -711,7 +696,7 @@
       let vhHeaders = ["STT", "Chỉ Tiêu Vận Hành", "26-W46", "26-W47", "26-W48", "26-W49", "Plan", "+ / - Thực Hiện"];
       let vhWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
 
-      let tkHeaders = ["STT", "Hạng Mục / POP", "26-W46", "26-W47", "26-W48", "26-W49", "Lũy Kế", "Đơn Vị", "Ghi Chú"];
+      let tkHeaders = ["STT", "Hạng Mục / POP", "26-W46", "26-W47", "26-W48", "26-W49", "Đơn Vị", "Ghi Chú"];
       let tkWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
 
       let ktHeaders = ["STT", "POP", "Tổng Port", "Port Sử Dụng", "Port Trống", "Tỷ Lệ (%)", "Ghi Chú Trạng Thái"];
@@ -720,27 +705,20 @@
       let mod2StartRow = -1;
       let mod3StartRow = -1;
 
+      // Thuật toán tìm phân đoạn các Module dựa trên từ khóa linh hoạt
       for (let r = 0; r < matrix.length; r++) {
-        const row = matrix[r] || [];
-        const cell0 = String(row[0] || "").trim().toLowerCase();
-        const rowText = row.map(c => String(c || "").trim().toLowerCase()).join(" ");
+        const rowText = (matrix[r] || []).map(c => String(c || "").trim().toLowerCase()).join(" ");
 
-        if (mod1StartRow === -1) {
-          if (cell0.startsWith("i.") || rowText.includes("i. vận hành") || rowText.includes("i.vận hành") || rowText.includes("chỉ tiêu vận hành") || rowText.includes("chỉ số kpis")) {
-            mod1StartRow = r;
-          }
+        if (mod1StartRow === -1 && (rowText.includes("i. vận hành") || rowText.includes("vận hành") || rowText.includes("chỉ số kpis"))) {
+          mod1StartRow = r;
         }
 
-        if (mod2StartRow === -1 && (mod1StartRow === -1 || r > mod1StartRow + 2)) {
-          if ((cell0.startsWith("ii.") || rowText.includes("ii. triển khai") || rowText.includes("ii.triển khai")) && !rowText.includes("nhận xét") && !rowText.startsWith("-")) {
-            mod2StartRow = r;
-          }
+        if (mod2StartRow === -1 && r > mod1StartRow && (rowText.includes("ii. triển khai") || rowText.includes("triển khai"))) {
+          mod2StartRow = r;
         }
 
-        if (mod3StartRow === -1 && (mod2StartRow === -1 || r > mod2StartRow + 2)) {
-          if ((cell0.startsWith("iii.") || rowText.includes("iii. khai thác") || rowText.includes("iii.khai thác")) && !rowText.includes("nhận xét") && !rowText.startsWith("-")) {
-            mod3StartRow = r;
-          }
+        if (mod3StartRow === -1 && r > mod1StartRow && (rowText.includes("iii. khai thác") || rowText.includes("khai thác"))) {
+          mod3StartRow = r;
         }
       }
 
@@ -748,30 +726,26 @@
       if (mod2StartRow === -1) mod2StartRow = Math.min(16, matrix.length);
       if (mod3StartRow === -1) mod3StartRow = Math.min(30, matrix.length);
 
-      // 1. MODUL I: VẬN HÀNH (Khớp đúng cột D, E, F, G,... từ Google Sheet)
-      let vhCols = { stt: 1, metric: 2, weeks: [3, 4, 5, 6], plan: 8, diff: 9 };
+      // 1. MODUL I: VẬN HÀNH
+      let vhCols = { stt: -1, metric: -1, weeks: [], plan: -1, diff: -1 };
       for (let r = mod1StartRow; r < mod2StartRow; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        // Tìm dòng chứa tiêu đề
-        if (rowText.includes("stt") && (rowText.includes("chỉ số kpis") || rowText.includes("chỉ tiêu") || rowText.some(x => x.includes("kpis") || x.includes("chỉ tiêu")))) {
-          
+        if (rowText.includes("stt") && rowText.some(x => x.includes("kpis") || x.includes("chỉ tiêu"))) {
           vhCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
           vhCols.metric = row.findIndex(c => String(c).toLowerCase().includes("kpis") || String(c).toLowerCase().includes("chỉ tiêu"));
+          vhCols.plan = row.findIndex(c => String(c).toLowerCase().trim() === "plan" || String(c).toLowerCase().includes("kế hoạch"));
+          vhCols.diff = row.findIndex(c => String(c).toLowerCase().includes("plan") && String(c).includes("+"));
+
           if (vhCols.stt === -1) vhCols.stt = 1;
           if (vhCols.metric === -1) vhCols.metric = 2;
-
-          vhCols.plan = row.findIndex(c => String(c).toLowerCase().trim() === "plan" || String(c).toLowerCase().includes("kế hoạch"));
           if (vhCols.plan === -1) vhCols.plan = 8;
-
-          vhCols.diff = row.findIndex(c => String(c).toLowerCase().includes("plan") && String(c).includes("+"));
           if (vhCols.diff === -1) vhCols.diff = 9;
 
           vhCols.weeks = [];
           vhWeekHeaders = [];
 
-          // Tự động quét tất cả các ô chứa thông tin Tuần (từ sau Chỉ số KPIs tới Plan)
           for (let c = vhCols.metric + 1; c < vhCols.plan; c++) {
             let cellStr = String(row[c] || "").trim();
             if (cellStr !== "") {
@@ -785,9 +759,7 @@
             vhWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
           }
 
-          let planHeaderName = String(row[vhCols.plan] || "Plan").trim();
-          let diffHeaderName = String(row[vhCols.diff] || "+/- Plan").trim();
-          vhHeaders = ["STT", String(row[vhCols.metric] || "Chỉ Tiêu Vận Hành").trim(), ...vhWeekHeaders, planHeaderName, diffHeaderName];
+          vhHeaders = ["STT", String(row[vhCols.metric] || "Chỉ Tiêu Vận Hành").trim(), ...vhWeekHeaders, String(row[vhCols.plan] || "Plan").trim(), String(row[vhCols.diff] || "+/- Plan").trim()];
           continue;
         }
 
@@ -816,10 +788,6 @@
           let rawPlanCell = row[vhCols.plan];
           let planVal = rawPlanCell !== undefined ? String(rawPlanCell).trim() : "";
           let rawPlan = parseCleanNumber(rawPlanCell);
-          if (typeof rawPlanCell === 'number' && rawPlanCell > 0 && rawPlanCell <= 1) {
-            rawPlan = parseFloat((rawPlanCell * 100).toFixed(2));
-            planVal = `${rawPlan}%`;
-          }
 
           let rawDiffCell = row[vhCols.diff];
           let diffVal = rawDiffCell !== undefined ? String(rawDiffCell).trim() : "";
@@ -835,22 +803,16 @@
             rawDiff: rawDiff,
             isPercent: isPercentMetric
           });
-        } else {
-          const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
-          if (noteText.length > 5 && !noteText.toLowerCase().includes("i. vận hành") && !noteText.toLowerCase().includes("ii. triển khai") && !noteText.toLowerCase().includes("chỉ số kpis")) {
-            newVhNotes.push(noteText.replace(/^[-*•]\s*/, ""));
-          }
         }
       }
 
-      // 2. MODUL II: TRIỂN KHAI (Đọc chính xác tiêu đề các ô D19, E19, F19, G19...)
-      let tkCols = { stt: 1, pop: 2, weeks: [3, 4, 5, 6], total: 7, unit: 8, note: 9 };
+      // 2. MODUL II: TRIỂN KHAI (ĐÃ XÓA CỘT TỔNG / LŨY KẾ)
+      let tkCols = { stt: -1, pop: -1, weeks: [] };
       for (let r = mod2StartRow; r < mod3StartRow; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
         if (rowText.includes("stt") && (rowText.includes("pop") || rowText.includes("hạng mục"))) {
-          
           tkCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
           tkCols.pop = row.findIndex(c => String(c).toLowerCase().includes("pop") || String(c).toLowerCase().includes("hạng mục"));
           if (tkCols.stt === -1) tkCols.stt = 1;
@@ -862,7 +824,7 @@
           for (let c = tkCols.pop + 1; c < row.length; c++) {
             let cellStr = String(row[c] || "").trim();
             if (cellStr !== "") {
-              if (cellStr.toLowerCase().includes("lũy kế") || cellStr.toLowerCase().includes("tổng") || cellStr.toLowerCase().includes("đơn vị")) {
+              if (cellStr.toLowerCase().includes("lũy kế") || cellStr.toLowerCase().includes("tổng") || cellStr.toLowerCase().includes("đơn vị") || cellStr.toLowerCase().includes("ghi chú")) {
                 break;
               }
               tkCols.weeks.push(c);
@@ -875,7 +837,8 @@
             tkWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
           }
 
-          tkHeaders = ["STT", "Hạng Mục / POP", ...tkWeekHeaders, "Tổng / Lũy Kế", "Đơn Vị", "Ghi Chú"];
+          // Xóa cột "Tổng / Lũy Kế" khỏi header
+          tkHeaders = ["STT", "Hạng Mục / POP", ...tkWeekHeaders, "Đơn Vị", "Ghi Chú"];
           continue;
         }
 
@@ -885,55 +848,77 @@
 
         if (!isNaN(sttNum) && sttNum > 0 && popCell !== "") {
           const vals = tkCols.weeks.map(c => parseCleanNumber(row[c]));
-          let totalVal = parseCleanNumber(row[tkCols.weeks[tkCols.weeks.length - 1] + 1]);
-          if (totalVal === 0 && vals.length > 0) {
-            totalVal = vals.reduce((a, b) => a + b, 0);
-          }
 
           newTkItems.push({
             stt: sttNum,
             pop: popCell,
             values: vals,
-            total: totalVal,
             unit: "Port",
             note: "Đang duy trì"
           });
         }
       }
 
-      // 3. MODUL III: KHAI THÁC
-      let ktCols = { stt: 1, pop: 2, total: 3, used: 4, free: 5, rate: 6, note: 7 };
+      // 3. MODUL III: KHAI THÁC (Tự động tìm kiếm vị trí cột chứa POP linh hoạt)
+      let ktCols = { stt: -1, pop: -1, total: -1, used: -1, free: -1, rate: -1, note: -1 };
       for (let r = mod3StartRow; r < matrix.length; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        if (rowText.includes("stt") && (rowText.includes("pop") || rowText.includes("tổng port"))) {
-          continue;
+        // Nhận diện header của Khai thác
+        if (rowText.includes("stt") || rowText.includes("pop") || rowText.includes("mã pop") || rowText.includes("tổng port")) {
+          let foundStt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
+          let foundPop = row.findIndex(c => String(c).toLowerCase().includes("pop") || String(c).toLowerCase().includes("mã"));
+          
+          if (foundPop !== -1) {
+            ktCols.stt = foundStt !== -1 ? foundStt : Math.max(0, foundPop - 1);
+            ktCols.pop = foundPop;
+            ktCols.total = row.findIndex(c => String(c).toLowerCase().includes("tổng"));
+            ktCols.used = row.findIndex(c => String(c).toLowerCase().includes("sử dụng") || String(c).toLowerCase().includes("dùng"));
+            ktCols.free = row.findIndex(c => String(c).toLowerCase().includes("trống") || String(c).toLowerCase().includes("rỗng"));
+            ktCols.rate = row.findIndex(c => String(c).toLowerCase().includes("tỷ lệ") || String(c).toLowerCase().includes("%"));
+            
+            if (ktCols.total === -1) ktCols.total = ktCols.pop + 1;
+            if (ktCols.used === -1) ktCols.used = ktCols.pop + 2;
+            if (ktCols.free === -1) ktCols.free = ktCols.pop + 3;
+            if (ktCols.rate === -1) ktCols.rate = ktCols.pop + 4;
+            continue;
+          }
+        }
+
+        // Mặc định gán chỉ số cột nếu chưa quét được header
+        if (ktCols.pop === -1) {
+          ktCols = { stt: 1, pop: 2, total: 3, used: 4, free: 5, rate: 6, note: 7 };
         }
 
         const sttCell = row[ktCols.stt] !== undefined ? String(row[ktCols.stt]).trim() : "";
         const popCell = row[ktCols.pop] !== undefined ? String(row[ktCols.pop]).trim() : "";
         const sttNum = parseInt(sttCell);
 
-        if (!isNaN(sttNum) && sttNum > 0 && popCell !== "") {
+        if ((!isNaN(sttNum) && sttNum > 0 && popCell !== "") || (popCell.toUpperCase().startsWith("TCG") || popCell.toUpperCase().startsWith("POP"))) {
           const totalP = parseCleanNumber(row[ktCols.total]);
           const usedP = parseCleanNumber(row[ktCols.used]);
-          let freeP = Math.max(0, totalP - usedP);
-          let rateP = totalP > 0 ? (usedP / totalP) * 100 : 0;
+          let freeP = parseCleanNumber(row[ktCols.free]);
+          if (freeP === 0 && totalP > 0) freeP = Math.max(0, totalP - usedP);
+
+          let rateP = parseCleanNumber(row[ktCols.rate]);
+          if (rateP === 0 && totalP > 0) {
+            rateP = (usedP / totalP) * 100;
+          }
 
           newKtItems.push({
-            stt: sttNum,
+            stt: newKtItems.length + 1,
             pop: popCell,
             total: totalP,
             used: usedP,
             free: freeP,
             rate: parseFloat(rateP.toFixed(2)),
-            note: rateP >= 50 ? "Tỷ lệ khai thác cao" : "Trung bình"
+            note: rateP >= 50 ? "Tỷ lệ khai thác cao" : (rateP < 30 ? "Thấp - Cần tối ưu" : "Trung bình")
           });
         }
       }
 
-      // Cập nhật State
+      // Cập nhật State Toàn Cục
       dashboardData.vanhanh.headers = vhHeaders;
       dashboardData.vanhanh.weekHeaders = vhWeekHeaders;
       if (newVhItems.length > 0) dashboardData.vanhanh.items = newVhItems;
@@ -944,6 +929,15 @@
 
       dashboardData.khaithac.headers = ktHeaders;
       if (newKtItems.length > 0) dashboardData.khaithac.items = newKtItems;
+
+      // Tính toán RA PORT TRONG THÁNG
+      let portSum = 0;
+      newTkItems.forEach(item => {
+        if (item.values && item.values.length > 0) {
+          portSum += item.values[item.values.length - 1];
+        }
+      });
+      dashboardData.totalPortH20 = portSum > 0 ? portSum : 325;
 
       renderDashboard();
     }
@@ -1038,7 +1032,20 @@
     }
 
     function renderDashboard() {
-      // 1. Modul Vận Hành
+      // 1. KPI Header
+      const totalH20El = document.getElementById('kpi-total-h20-ports');
+      if (totalH20El) {
+        totalH20El.innerText = dashboardData.totalPortH20.toLocaleString('vi-VN');
+      }
+
+      const ktItems = dashboardData.khaithac.items;
+      const ktAvgRate = ktItems.length > 0 ? (ktItems.reduce((acc, curr) => acc + curr.rate, 0) / ktItems.length).toFixed(1) : 0;
+      const avgRateEl = document.getElementById('kpi-khaithac-avg-rate');
+      if (avgRateEl) avgRateEl.innerText = `${ktAvgRate}%`;
+
+      document.getElementById('totalPopsCount').innerText = `${ktItems.length} POPs`;
+
+      // 2. Modul Vận Hành
       renderTableHeader('thead-vanhanh', dashboardData.vanhanh.headers);
       renderTable('table-body-vanhanh', dashboardData.vanhanh.items, (item) => {
         const valCells = (item.values || []).map((val) => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${val}</td>`).join('');
@@ -1053,7 +1060,7 @@
         `;
       });
 
-      // 2. Modul Triển Khai
+      // 3. Modul Triển Khai (XÓA CỘT TỔNG LŨY KẾ)
       renderTableHeader('thead-trienkhai', dashboardData.trienkhai.headers);
       renderTable('table-body-trienkhai', dashboardData.trienkhai.items, (item) => {
         const weekCells = (item.values || []).map(v => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${v}</td>`).join('');
@@ -1061,13 +1068,12 @@
           <td class="p-3 text-center border border-slate-800 font-semibold text-slate-400">${item.stt}</td>
           <td class="p-3 text-center border border-slate-800 font-medium text-white">${item.pop}</td>
           ${weekCells}
-          <td class="p-3 text-center border border-slate-800 font-bold font-mono text-emerald-400">${item.total.toLocaleString('vi-VN')}</td>
           <td class="p-3 text-center border border-slate-800 text-slate-400">${item.unit}</td>
           <td class="p-3 text-center border border-slate-800"><span class="px-2 py-0.5 rounded text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">${item.note}</span></td>
         `;
       });
 
-      // 3. Modul Khai Thác
+      // 4. Modul Khai Thác
       renderTableHeader('thead-khaithac', dashboardData.khaithac.headers);
       renderTable('table-body-khaithac', dashboardData.khaithac.items, (item) => `
         <td class="p-3 text-center border border-slate-800 font-semibold text-slate-400">${item.stt}</td>
@@ -1079,7 +1085,6 @@
         <td class="p-3 text-center border border-slate-800">${renderRateBadge(item.rate, item.note)}</td>
       `);
 
-      document.getElementById('totalPopsCount').innerText = `${dashboardData.khaithac.items.length} POPs`;
       renderAllCharts();
     }
 
@@ -1099,6 +1104,54 @@
         }
       };
 
+      // 1. Overview Chart
+      const ctxOvVh = document.getElementById('overviewVanHanhChart')?.getContext('2d');
+      if (ctxOvVh && dashboardData.vanhanh.items.length > 0) {
+        chartInstances.ovVh = new Chart(ctxOvVh, {
+          type: 'line',
+          data: {
+            labels: dashboardData.vanhanh.weekHeaders,
+            datasets: dashboardData.vanhanh.items.slice(0, 7).map((item, idx) => {
+              const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4'];
+              return {
+                label: item.metric,
+                data: item.rawValues || item.values,
+                borderColor: colors[idx % colors.length],
+                borderWidth: 2,
+                tension: 0.3,
+                fill: false
+              };
+            })
+          },
+          options: chartDefaults
+        });
+      }
+
+      // 2. Overview Doughnut
+      const ctxOvKt = document.getElementById('overviewKhaiThacPieChart')?.getContext('2d');
+      if (ctxOvKt && dashboardData.khaithac.items.length > 0) {
+        const totalUsed = dashboardData.khaithac.items.reduce((acc, c) => acc + c.used, 0);
+        const totalFree = dashboardData.khaithac.items.reduce((acc, c) => acc + c.free, 0);
+
+        chartInstances.ovKt = new Chart(ctxOvKt, {
+          type: 'doughnut',
+          data: {
+            labels: ['Port Đã Sử Dụng', 'Port Còn Trống'],
+            datasets: [{
+              data: [totalUsed, totalFree],
+              backgroundColor: ['#f59e0b', '#334155'],
+              borderWidth: 0
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
+          }
+        });
+      }
+
+      // 3. Modul I Chart
       const ctxVhDet = document.getElementById('vanhanhDetailChart')?.getContext('2d');
       if (ctxVhDet && dashboardData.vanhanh.items.length > 0) {
         const weekColors = ['#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#c084fc'];
@@ -1116,6 +1169,65 @@
             }))
           },
           options: chartDefaults
+        });
+      }
+
+      // 4. Modul III Top Charts
+      const ctxKtTop = document.getElementById('khaithacTopChart')?.getContext('2d');
+      if (ctxKtTop && dashboardData.khaithac.items.length > 0) {
+        const topPops = [...dashboardData.khaithac.items].sort((a, b) => b.rate - a.rate).slice(0, 5);
+        chartInstances.ktTop = new Chart(ctxKtTop, {
+          type: 'bar',
+          data: {
+            labels: topPops.map(i => i.pop),
+            datasets: [{
+              label: 'Tỷ Lệ Khai Thác (%)',
+              data: topPops.map(i => i.rate),
+              backgroundColor: '#f59e0b',
+              borderRadius: 6
+            }]
+          },
+          options: chartDefaults
+        });
+      }
+
+      const ctxKtLowest = document.getElementById('khaithacLowestChart')?.getContext('2d');
+      if (ctxKtLowest && dashboardData.khaithac.items.length > 0) {
+        const lowestPops = [...dashboardData.khaithac.items].sort((a, b) => a.rate - b.rate).slice(0, 5);
+        chartInstances.ktLowest = new Chart(ctxKtLowest, {
+          type: 'bar',
+          data: {
+            labels: lowestPops.map(i => i.pop),
+            datasets: [{
+              label: 'Tỷ Lệ Khai Thác Thấp (%)',
+              data: lowestPops.map(i => i.rate),
+              backgroundColor: '#f43f5e',
+              borderRadius: 6
+            }]
+          },
+          options: chartDefaults
+        });
+      }
+
+      const ctxKtStruct = document.getElementById('khaithacPortStructureChart')?.getContext('2d');
+      if (ctxKtStruct && dashboardData.khaithac.items.length > 0) {
+        const totalUsed = dashboardData.khaithac.items.reduce((acc, c) => acc + c.used, 0);
+        const totalFree = dashboardData.khaithac.items.reduce((acc, c) => acc + c.free, 0);
+
+        chartInstances.ktStruct = new Chart(ctxKtStruct, {
+          type: 'pie',
+          data: {
+            labels: ['Port Sử Dụng', 'Port Trống'],
+            datasets: [{
+              data: [totalUsed, totalFree],
+              backgroundColor: ['#10b981', '#475569']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
+          }
         });
       }
     }
