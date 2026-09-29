@@ -379,7 +379,6 @@
   </div>
 
   <script>
-    // Đăng ký Plugin DataLabels cho Chart.js
     Chart.register(ChartDataLabels);
 
     let chartInstances = {};
@@ -643,7 +642,7 @@
       if (mod2StartRow === -1) mod2StartRow = Math.min(16, matrix.length);
       if (mod3StartRow === -1) mod3StartRow = Math.min(30, matrix.length);
 
-      // 1. MODUL I: VẬN HÀNH
+      // 1. MODUL I: VẬN HÀNH (Đã tối ưu chuẩn hoá phần trăm cho PLAN và +/- PLAN)
       let vhCols = { stt: -1, metric: -1, weeks: [], plan: -1, diff: -1 };
       for (let r = mod1StartRow; r < mod2StartRow; r++) {
         const row = matrix[r] || [];
@@ -702,22 +701,63 @@
             vals.push(isPercentMetric ? `${numVal}%` : numVal);
           }
 
+          // XỬ LÝ CHUẨN PLAN
           let rawPlanCell = row[vhCols.plan];
-          let planVal = rawPlanCell !== undefined ? String(rawPlanCell).trim() : "";
-          let rawPlan = parseCleanNumber(rawPlanCell);
+          let planVal = "";
+          if (typeof rawPlanCell === 'number') {
+            if (isPercentMetric) {
+              let pNum = rawPlanCell <= 1 ? rawPlanCell * 100 : rawPlanCell;
+              planVal = `${parseFloat(pNum.toFixed(2))}%`;
+            } else {
+              planVal = rawPlanCell;
+            }
+          } else {
+            let pStr = String(rawPlanCell || "").trim();
+            let pNum = parseCleanNumber(pStr);
+            if (isPercentMetric) {
+              if (!pStr.includes('%') && pNum > 0 && pNum <= 1) pNum = pNum * 100;
+              planVal = `${parseFloat(pNum.toFixed(2))}%`;
+            } else {
+              planVal = pStr || pNum;
+            }
+          }
 
+          // XỬ LÝ CHUẨN +/- PLAN
           let rawDiffCell = row[vhCols.diff];
-          let diffVal = rawDiffCell !== undefined ? String(rawDiffCell).trim() : "";
-          let rawDiff = parseCleanNumber(rawDiffCell);
+          let diffVal = "";
+          let rawDiffNum = parseCleanNumber(rawDiffCell);
+
+          if (typeof rawDiffCell === 'number') {
+            if (isPercentMetric) {
+              let dNum = Math.abs(rawDiffCell) <= 1 ? rawDiffCell * 100 : rawDiffCell;
+              rawDiffNum = dNum;
+              let sign = dNum > 0 ? "+" : "";
+              diffVal = `${sign}${parseFloat(dNum.toFixed(2))}%`;
+            } else {
+              let sign = rawDiffCell > 0 ? "+" : "";
+              diffVal = `${sign}${rawDiffCell}`;
+            }
+          } else {
+            let dStr = String(rawDiffCell || "").trim();
+            if (isPercentMetric) {
+              if (!dStr.includes('%') && Math.abs(rawDiffNum) > 0 && Math.abs(rawDiffNum) <= 1) {
+                rawDiffNum = rawDiffNum * 100;
+              }
+              let sign = rawDiffNum > 0 ? "+" : "";
+              diffVal = `${sign}${parseFloat(rawDiffNum.toFixed(2))}%`;
+            } else {
+              diffVal = dStr || rawDiffNum;
+            }
+          }
 
           newVhItems.push({
             stt: sttNum,
             metric: metricCell,
             values: vals,
             rawValues: rawVals,
-            plan: planVal || rawPlan,
-            diff: diffVal || rawDiff,
-            rawDiff: rawDiff,
+            plan: planVal,
+            diff: diffVal,
+            rawDiff: rawDiffNum,
             isPercent: isPercentMetric
           });
         } else {
@@ -917,21 +957,6 @@
       return `<span class="px-2 py-0.5 rounded text-[11px] font-medium border ${badgeClass}">${note || (rate + '%')}</span>`;
     }
 
-    function formatDiffTwoDecimals(diffVal, isPercent = false) {
-      if (diffVal === undefined || diffVal === null || diffVal === "") return "";
-      let str = String(diffVal).trim();
-      if (str.includes('%')) return str;
-
-      let cleanStr = str.replace(/\+/g, '').replace(',', '.');
-      let num = parseFloat(cleanStr);
-      if (isNaN(num)) return str;
-      
-      let rounded = Math.round(num * 100) / 100;
-      let formattedStr = rounded.toString().replace('.', ',');
-      let sign = rounded > 0 ? '+' : '';
-      return isPercent ? `${sign}${formattedStr}%` : `${sign}${formattedStr}`;
-    }
-
     function switchTab(tabId) {
       const contents = document.querySelectorAll('.tab-content');
       contents.forEach(el => el.classList.add('hidden'));
@@ -991,14 +1016,16 @@
       renderTableHeader('thead-vanhanh', dashboardData.vanhanh.headers);
       renderTable('table-body-vanhanh', dashboardData.vanhanh.items, (item) => {
         const valCells = (item.values || []).map((val) => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${val}</td>`).join('');
-        const formattedDiff = formatDiffTwoDecimals(item.diff, item.isPercent);
+        
+        // Tô màu xanh cho chỉ số âm/tốt, màu cam cho chỉ số vượt
+        let isGood = item.rawDiff <= 0 || String(item.diff).startsWith('-');
 
         return `
           <td class="p-3 text-center border border-slate-800 font-semibold text-slate-400">${item.stt}</td>
           <td class="p-3 text-center border border-slate-800 font-medium text-white">${item.metric}</td>
           ${valCells}
-          <td class="p-3 text-center border border-slate-800 font-mono text-slate-400">${item.plan}</td>
-          <td class="p-3 text-center border border-slate-800 font-mono ${item.rawDiff <= 0 || (typeof formattedDiff === 'string' && formattedDiff.startsWith('-')) ? 'text-emerald-400' : 'text-amber-400'}">${formattedDiff}</td>
+          <td class="p-3 text-center border border-slate-800 font-mono text-slate-300 font-bold">${item.plan}</td>
+          <td class="p-3 text-center border border-slate-800 font-mono font-bold ${isGood ? 'text-emerald-400' : 'text-amber-400'}">${item.diff}</td>
         `;
       });
 
