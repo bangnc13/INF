@@ -717,7 +717,6 @@
             isPercent: isPercentMetric
           });
         } else {
-          // Thu thập nhận xét Vận hành (cả dòng 10, 11, 12, 13, 14, 15)
           const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
           if (noteText.length > 2 && !noteText.toLowerCase().includes("i. vận hành") && !noteText.toLowerCase().includes("stt")) {
             newVhNotes.push(noteText.replace(/^[-*•1234567890.]+\s*/, ""));
@@ -725,7 +724,7 @@
         }
       }
 
-      // 2. MODUL II: TRIỂN KHAI
+      // 2. MODUL II: TRIỂN KHAI (LỌC HOÀN TOÀN DÒNG 'TỔNG 340' KHỎI PHẦN NHẬN XÉT)
       let tkCols = { stt: -1, pop: -1, weeks: [] };
       for (let r = mod2StartRow; r < mod3StartRow; r++) {
         const row = matrix[r] || [];
@@ -775,14 +774,21 @@
             note: "Đang duy trì"
           });
         } else {
+          // Lọc bỏ triệt để các câu/dòng chứa từ "tổng" hoặc giá trị số tổng như "Tổng 340"
           const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
-          if (noteText.length > 2 && !noteText.toLowerCase().includes("ii. triển khai") && !noteText.toLowerCase().includes("stt")) {
+          const cleanTextLower = noteText.toLowerCase();
+
+          if (noteText.length > 2 && 
+              !cleanTextLower.includes("ii. triển khai") && 
+              !cleanTextLower.includes("stt") && 
+              !cleanTextLower.startsWith("tổng") && 
+              !cleanTextLower.includes("tổng 340")) {
             newTkNotes.push(noteText.replace(/^[-*•1234567890.]+\s*/, ""));
           }
         }
       }
 
-      // 3. MODUL III: KHAI THÁC (Tự động tính đúng Tỷ Lệ phần trăm 58.0%, 65.7%...)
+      // 3. MODUL III: KHAI THÁC
       let ktCols = { stt: -1, pop: -1, total: -1, used: -1, free: -1, rate: -1, note: -1 };
       for (let r = mod3StartRow; r < matrix.length; r++) {
         const row = matrix[r] || [];
@@ -824,7 +830,6 @@
           let freeP = parseCleanNumber(row[ktCols.free]);
           if (freeP === 0 && totalP > 0) freeP = Math.max(0, totalP - usedP);
 
-          // CÔNG THỨC CHUẨN TÍNH TỶ LỆ KHAI THÁC %
           let rateP = 0;
           let rawRate = row[ktCols.rate];
           if (typeof rawRate === 'number' && rawRate > 0) {
