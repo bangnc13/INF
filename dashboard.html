@@ -86,11 +86,6 @@
         <span id="syncPulseBadge" class="w-2 h-2 rounded-full bg-white animate-ping hidden"></span>
       </button>
 
-      <button onclick="downloadSampleExcel()" class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
-        <i data-lucide="download" class="w-4 h-4 text-emerald-400"></i>
-        <span>Tải File Mẫu</span>
-      </button>
-
       <label class="cursor-pointer flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition active:scale-95">
         <i data-lucide="upload-cloud" class="w-4 h-4 text-blue-400"></i>
         <span>Import File Offline</span>
@@ -119,47 +114,12 @@
       <div class="space-y-2">
         <label class="text-xs font-semibold text-slate-300">Đường dẫn Google Sheet (Spreadsheet URL):</label>
         <div class="flex gap-2">
-          <input type="text" id="gsheetUrlInput" value="https://docs.google.com/spreadsheets/d/1UpCxfr4MsecT5M4umP-gN7DTAj6yspJsWXOQRSuAqYo/edit?gid=0#gid=0" placeholder="https://docs.google.com/spreadsheets/d/..." class="flex-1 px-3.5 py-2.5 rounded-xl text-xs bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-emerald-500 font-mono" />
+          <input type="text" id="gsheetUrlInput" value="https://docs.google.com/spreadsheets/d/1UpCxfr4MsecT5M4umP-gN7DTAj6yspJsWXOQRSuAqYo/edit?gid=0#gid=0" class="flex-1 px-3.5 py-2.5 rounded-xl text-xs bg-slate-900 border border-slate-700 text-slate-100 focus:outline-none focus:border-emerald-500 font-mono" />
           <button onclick="syncGoogleSheetNow()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 flex-shrink-0 shadow-lg shadow-emerald-600/30">
             <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
             <span>Đồng Bộ Ngay</span>
           </button>
         </div>
-      </div>
-
-      <div class="glass-card p-4 rounded-xl border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
-            <span class="text-xs font-medium text-slate-200">Tự động làm mới khi nhập liệu:</span>
-          </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="autoSyncToggle" class="sr-only peer" checked onchange="toggleAutoSync(this.checked)">
-            <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
-          </label>
-        </div>
-
-        <div class="flex items-center justify-between text-xs text-slate-400 pt-1 border-t border-slate-800/80">
-          <span>Tần suất cập nhật:</span>
-          <select id="autoSyncIntervalSelect" onchange="changeSyncInterval(this.value)" class="bg-slate-900 text-slate-200 text-xs rounded-lg border border-slate-700 px-2 py-1 focus:outline-none">
-            <option value="10000">10 giây</option>
-            <option value="15000" selected>15 giây</option>
-            <option value="30000">30 giây</option>
-            <option value="60000">1 phút</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs space-y-1.5 text-blue-200">
-        <div class="flex items-center gap-1.5 font-bold text-blue-300">
-          <i data-lucide="info" class="w-4 h-4 text-blue-400"></i>
-          <span>Lưu ý quan trọng để Google Sheet đồng bộ:</span>
-        </div>
-        <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-300">
-          <li>Mở File Google Sheet của bạn.</li>
-          <li>Nút <b>Chia sẻ (Share)</b> ở góc phải trên cùng &rarr; Chọn <b>Bất kỳ ai có đường liên kết (Anyone with the link)</b>.</li>
-          <li>Mọi thay đổi số liệu trên Google Sheet sẽ được ứng dụng tự động tải về!</li>
-        </ol>
       </div>
 
       <div class="flex justify-end pt-2">
@@ -418,35 +378,6 @@
   </div>
 
   <script>
-    const barValuePlugin = {
-      id: 'barValuePlugin',
-      afterDatasetsDraw(chart) {
-        if (chart.config.id !== 'vanhanhDetailChart') return;
-        const { ctx } = chart;
-        chart.data.datasets.forEach((dataset, i) => {
-          const meta = chart.getDatasetMeta(i);
-          if (!meta.hidden) {
-            meta.data.forEach((element, index) => {
-              const rawVal = dataset.data[index];
-              if (rawVal !== null && rawVal !== undefined && rawVal !== 0) {
-                ctx.save();
-                ctx.fillStyle = '#cbd5e1';
-                ctx.font = '9px Inter, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom';
-                const isPercent = dashboardData.vanhanh.items[index]?.isPercent;
-                const text = isPercent ? rawVal + '%' : rawVal;
-                ctx.fillText(text, element.x, element.y - 2);
-                ctx.restore();
-              }
-            });
-          }
-        });
-      }
-    };
-
-    Chart.register(barValuePlugin);
-
     let chartInstances = {};
 
     let gsheetConfig = {
@@ -608,23 +539,6 @@
       }
     }
 
-    function toggleAutoSync(enabled) {
-      gsheetConfig.autoSync = enabled;
-      if (enabled) {
-        startAutoSync();
-        syncGoogleSheetNow(true);
-      } else {
-        stopAutoSync();
-      }
-    }
-
-    function changeSyncInterval(ms) {
-      gsheetConfig.intervalMs = parseInt(ms) || 15000;
-      if (gsheetConfig.autoSync) {
-        startAutoSync();
-      }
-    }
-
     function parseCleanNumber(val) {
       if (val === undefined || val === null || val === "") return 0;
       if (typeof val === 'number') {
@@ -705,7 +619,6 @@
       let mod2StartRow = -1;
       let mod3StartRow = -1;
 
-      // Thuật toán tìm phân đoạn các Module dựa trên từ khóa linh hoạt
       for (let r = 0; r < matrix.length; r++) {
         const rowText = (matrix[r] || []).map(c => String(c || "").trim().toLowerCase()).join(" ");
 
@@ -803,10 +716,16 @@
             rawDiff: rawDiff,
             isPercent: isPercentMetric
           });
+        } else {
+          // Thu thập nhận xét Vận hành (cả dòng 10, 11, 12, 13, 14, 15)
+          const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
+          if (noteText.length > 2 && !noteText.toLowerCase().includes("i. vận hành") && !noteText.toLowerCase().includes("stt")) {
+            newVhNotes.push(noteText.replace(/^[-*•1234567890.]+\s*/, ""));
+          }
         }
       }
 
-      // 2. MODUL II: TRIỂN KHAI (ĐÃ XÓA CỘT TỔNG / LŨY KẾ)
+      // 2. MODUL II: TRIỂN KHAI
       let tkCols = { stt: -1, pop: -1, weeks: [] };
       for (let r = mod2StartRow; r < mod3StartRow; r++) {
         const row = matrix[r] || [];
@@ -837,7 +756,6 @@
             tkWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
           }
 
-          // Xóa cột "Tổng / Lũy Kế" khỏi header
           tkHeaders = ["STT", "Hạng Mục / POP", ...tkWeekHeaders, "Đơn Vị", "Ghi Chú"];
           continue;
         }
@@ -856,19 +774,23 @@
             unit: "Port",
             note: "Đang duy trì"
           });
+        } else {
+          const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
+          if (noteText.length > 2 && !noteText.toLowerCase().includes("ii. triển khai") && !noteText.toLowerCase().includes("stt")) {
+            newTkNotes.push(noteText.replace(/^[-*•1234567890.]+\s*/, ""));
+          }
         }
       }
 
-      // 3. MODUL III: KHAI THÁC (Tự động tìm kiếm vị trí cột chứa POP linh hoạt)
+      // 3. MODUL III: KHAI THÁC (Tự động tính đúng Tỷ Lệ phần trăm 58.0%, 65.7%...)
       let ktCols = { stt: -1, pop: -1, total: -1, used: -1, free: -1, rate: -1, note: -1 };
       for (let r = mod3StartRow; r < matrix.length; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        // Nhận diện header của Khai thác
-        if (rowText.includes("stt") || rowText.includes("pop") || rowText.includes("mã pop") || rowText.includes("tổng port")) {
+        if (rowText.includes("stt") || rowText.includes("pop") || rowText.includes("tổng port")) {
           let foundStt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
-          let foundPop = row.findIndex(c => String(c).toLowerCase().includes("pop") || String(c).toLowerCase().includes("mã"));
+          let foundPop = row.findIndex(c => String(c).toLowerCase().includes("pop"));
           
           if (foundPop !== -1) {
             ktCols.stt = foundStt !== -1 ? foundStt : Math.max(0, foundPop - 1);
@@ -877,16 +799,17 @@
             ktCols.used = row.findIndex(c => String(c).toLowerCase().includes("sử dụng") || String(c).toLowerCase().includes("dùng"));
             ktCols.free = row.findIndex(c => String(c).toLowerCase().includes("trống") || String(c).toLowerCase().includes("rỗng"));
             ktCols.rate = row.findIndex(c => String(c).toLowerCase().includes("tỷ lệ") || String(c).toLowerCase().includes("%"));
-            
+            ktCols.note = row.findIndex(c => String(c).toLowerCase().includes("ghi chú"));
+
             if (ktCols.total === -1) ktCols.total = ktCols.pop + 1;
             if (ktCols.used === -1) ktCols.used = ktCols.pop + 2;
             if (ktCols.free === -1) ktCols.free = ktCols.pop + 3;
             if (ktCols.rate === -1) ktCols.rate = ktCols.pop + 4;
+            if (ktCols.note === -1) ktCols.note = ktCols.pop + 5;
             continue;
           }
         }
 
-        // Mặc định gán chỉ số cột nếu chưa quét được header
         if (ktCols.pop === -1) {
           ktCols = { stt: 1, pop: 2, total: 3, used: 4, free: 5, rate: 6, note: 7 };
         }
@@ -901,10 +824,16 @@
           let freeP = parseCleanNumber(row[ktCols.free]);
           if (freeP === 0 && totalP > 0) freeP = Math.max(0, totalP - usedP);
 
-          let rateP = parseCleanNumber(row[ktCols.rate]);
-          if (rateP === 0 && totalP > 0) {
+          // CÔNG THỨC CHUẨN TÍNH TỶ LỆ KHAI THÁC %
+          let rateP = 0;
+          let rawRate = row[ktCols.rate];
+          if (typeof rawRate === 'number' && rawRate > 0) {
+            rateP = rawRate <= 1 ? rawRate * 100 : rawRate;
+          } else if (totalP > 0) {
             rateP = (usedP / totalP) * 100;
           }
+
+          let noteTextCell = row[ktCols.note] !== undefined ? String(row[ktCols.note]).trim() : "";
 
           newKtItems.push({
             stt: newKtItems.length + 1,
@@ -912,25 +841,32 @@
             total: totalP,
             used: usedP,
             free: freeP,
-            rate: parseFloat(rateP.toFixed(2)),
-            note: rateP >= 50 ? "Tỷ lệ khai thác cao" : (rateP < 30 ? "Thấp - Cần tối ưu" : "Trung bình")
+            rate: parseFloat(rateP.toFixed(1)),
+            note: noteTextCell || (rateP >= 50 ? "Tỷ lệ khai hiệu quả" : "Tỷ lệ khai thác thấp")
           });
+        } else {
+          const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
+          if (noteText.length > 2 && !noteText.toLowerCase().includes("iii. khai thác") && !noteText.toLowerCase().includes("stt")) {
+            newKtNotes.push(noteText.replace(/^[-*•1234567890.]+\s*/, ""));
+          }
         }
       }
 
-      // Cập nhật State Toàn Cục
+      // Cập nhật State
       dashboardData.vanhanh.headers = vhHeaders;
       dashboardData.vanhanh.weekHeaders = vhWeekHeaders;
       if (newVhItems.length > 0) dashboardData.vanhanh.items = newVhItems;
+      dashboardData.vanhanh.notes = newVhNotes;
 
       dashboardData.trienkhai.headers = tkHeaders;
       dashboardData.trienkhai.weekHeaders = tkWeekHeaders;
       if (newTkItems.length > 0) dashboardData.trienkhai.items = newTkItems;
+      dashboardData.trienkhai.notes = newTkNotes;
 
       dashboardData.khaithac.headers = ktHeaders;
       if (newKtItems.length > 0) dashboardData.khaithac.items = newKtItems;
+      dashboardData.khaithac.notes = newKtNotes;
 
-      // Tính toán RA PORT TRONG THÁNG
       let portSum = 0;
       newTkItems.forEach(item => {
         if (item.values && item.values.length > 0) {
@@ -965,10 +901,8 @@
 
     function renderRateBadge(rate, note) {
       let badgeClass = "bg-slate-800 text-slate-300 border-slate-700";
-      if (rate >= 60) {
+      if (rate >= 50) {
         badgeClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
-      } else if (rate >= 35) {
-        badgeClass = "bg-amber-500/10 text-amber-400 border-amber-500/30";
       } else {
         badgeClass = "bg-rose-500/10 text-rose-400 border-rose-500/30";
       }
@@ -1026,7 +960,7 @@
         <td class="p-3 text-center border border-slate-800 font-mono text-slate-300">${item.total.toLocaleString('vi-VN')}</td>
         <td class="p-3 text-center border border-slate-800 font-mono text-emerald-400 font-semibold">${item.used.toLocaleString('vi-VN')}</td>
         <td class="p-3 text-center border border-slate-800 font-mono text-slate-400">${item.free.toLocaleString('vi-VN')}</td>
-        <td class="p-3 text-center border border-slate-800 font-mono font-bold ${item.rate >= 50 ? 'text-amber-400' : (item.rate < 30 ? 'text-rose-400' : 'text-slate-300')}">${item.rate}%</td>
+        <td class="p-3 text-center border border-slate-800 font-mono font-bold ${item.rate >= 50 ? 'text-amber-400' : 'text-rose-400'}">${item.rate}%</td>
         <td class="p-3 text-center border border-slate-800">${renderRateBadge(item.rate, item.note)}</td>
       `);
     }
@@ -1045,7 +979,7 @@
 
       document.getElementById('totalPopsCount').innerText = `${ktItems.length} POPs`;
 
-      // 2. Modul Vận Hành
+      // 2. Modul Vận Hành Table & Nhận Xét
       renderTableHeader('thead-vanhanh', dashboardData.vanhanh.headers);
       renderTable('table-body-vanhanh', dashboardData.vanhanh.items, (item) => {
         const valCells = (item.values || []).map((val) => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${val}</td>`).join('');
@@ -1060,7 +994,16 @@
         `;
       });
 
-      // 3. Modul Triển Khai (XÓA CỘT TỔNG LŨY KẾ)
+      const vhNotesContainer = document.getElementById('vanhanh-notes-list');
+      if (vhNotesContainer) {
+        if (dashboardData.vanhanh.notes.length > 0) {
+          vhNotesContainer.innerHTML = dashboardData.vanhanh.notes.map(n => `<li class="leading-relaxed">${n}</li>`).join('');
+        } else {
+          vhNotesContainer.innerHTML = `<li class="text-slate-500 italic">Chưa có nhận xét vận hành.</li>`;
+        }
+      }
+
+      // 3. Modul Triển Khai Table & Nhận Xét
       renderTableHeader('thead-trienkhai', dashboardData.trienkhai.headers);
       renderTable('table-body-trienkhai', dashboardData.trienkhai.items, (item) => {
         const weekCells = (item.values || []).map(v => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${v}</td>`).join('');
@@ -1073,7 +1016,16 @@
         `;
       });
 
-      // 4. Modul Khai Thác
+      const tkNotesContainer = document.getElementById('trienkhai-notes-list');
+      if (tkNotesContainer) {
+        if (dashboardData.trienkhai.notes.length > 0) {
+          tkNotesContainer.innerHTML = dashboardData.trienkhai.notes.map(n => `<li class="leading-relaxed">${n}</li>`).join('');
+        } else {
+          tkNotesContainer.innerHTML = `<li class="text-slate-500 italic">Chưa có nhận xét triển khai.</li>`;
+        }
+      }
+
+      // 4. Modul Khai Thác Table & Nhận Xét
       renderTableHeader('thead-khaithac', dashboardData.khaithac.headers);
       renderTable('table-body-khaithac', dashboardData.khaithac.items, (item) => `
         <td class="p-3 text-center border border-slate-800 font-semibold text-slate-400">${item.stt}</td>
@@ -1081,9 +1033,18 @@
         <td class="p-3 text-center border border-slate-800 font-mono text-slate-300">${item.total.toLocaleString('vi-VN')}</td>
         <td class="p-3 text-center border border-slate-800 font-mono text-emerald-400 font-semibold">${item.used.toLocaleString('vi-VN')}</td>
         <td class="p-3 text-center border border-slate-800 font-mono text-slate-400">${item.free.toLocaleString('vi-VN')}</td>
-        <td class="p-3 text-center border border-slate-800 font-mono font-bold ${item.rate >= 50 ? 'text-amber-400' : (item.rate < 30 ? 'text-rose-400' : 'text-slate-300')}">${item.rate}%</td>
+        <td class="p-3 text-center border border-slate-800 font-mono font-bold ${item.rate >= 50 ? 'text-amber-400' : 'text-rose-400'}">${item.rate}%</td>
         <td class="p-3 text-center border border-slate-800">${renderRateBadge(item.rate, item.note)}</td>
       `);
+
+      const ktNotesContainer = document.getElementById('khaithac-notes-list');
+      if (ktNotesContainer) {
+        if (dashboardData.khaithac.notes.length > 0) {
+          ktNotesContainer.innerHTML = dashboardData.khaithac.notes.map(n => `<li class="leading-relaxed">${n}</li>`).join('');
+        } else {
+          ktNotesContainer.innerHTML = `<li class="text-slate-500 italic">Chưa có nhận xét khai thác.</li>`;
+        }
+      }
 
       renderAllCharts();
     }
@@ -1157,7 +1118,6 @@
         const weekColors = ['#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#c084fc'];
         
         chartInstances.vhDet = new Chart(ctxVhDet, {
-          id: 'vanhanhDetailChart',
           type: 'bar',
           data: {
             labels: dashboardData.vanhanh.items.map(i => i.metric),
