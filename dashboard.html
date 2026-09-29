@@ -597,7 +597,6 @@
       }
 
       // 1. Primary Attempt: Download raw binary XLSX directly from Google Sheets
-      // This ensures 100% exact numerical data & cell formats matching Book1.xlsx import
       const xlsxExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=xlsx&gid=${details.gid}&t=${Date.now()}`;
       try {
         const response = await fetch(xlsxExportUrl);
@@ -751,26 +750,18 @@
       let str = String(val).trim();
       if (!str) return 0;
 
-      // Remove percentage symbol
       str = str.replace(/%/g, '').trim();
-
-      // Clean spaces / non-breaking spaces
       str = str.replace(/[\s\u00A0]+/g, '');
 
-      // Handle thousand vs decimal separators
       if (str.includes('.') && str.includes(',')) {
         if (str.indexOf('.') < str.indexOf(',')) {
-          // VN Format: 1.570,50 -> 1570.50
           str = str.replace(/\./g, '').replace(',', '.');
         } else {
-          // US Format: 1,570.50 -> 1570.50
           str = str.replace(/,/g, '');
         }
       } else if (str.includes(',')) {
-        // Only comma present
         let parts = str.split(',');
         if (parts.length === 2) {
-          // Check if it's decimal (e.g. 21,50 or 14,20 or -1,8) vs thousand separator (1,570)
           if (parts[1].length === 2 || parts[1].length === 1) {
             str = str.replace(',', '.');
           } else if (parts[1].length === 3 && parseInt(parts[0]) >= 1) {
@@ -786,10 +777,8 @@
           str = str.replace(/,/g, '');
         }
       } else if (str.includes('.')) {
-        // Only dot present: handle VN thousand separator "1.570" vs decimal "21.50"
         let parts = str.split('.');
         if (parts.length === 2 && parts[1].length === 3 && parseInt(parts[0]) >= 1 && parseInt(parts[0]) < 1000) {
-          // If thousand separator in integer POP counts like 1.570 or 2.672
           if (parts[1] === "000") {
             str = parts[0] + "000";
           } else if (!["00", "50", "25", "75"].includes(parts[1].substring(0, 2))) {
@@ -859,7 +848,6 @@
 
       let ktHeaders = ["STT", "POP", "Tổng Port", "Port Sử Dụng", "Port Trống", "Tỷ Lệ (%)", "Ghi Chú Trạng Thái"];
 
-      // Robust Section Boundary Detector
       let mod1StartRow = -1;
       let mod2StartRow = -1;
       let mod3StartRow = -1;
@@ -892,17 +880,15 @@
       if (mod2StartRow === -1) mod2StartRow = Math.min(16, matrix.length);
       if (mod3StartRow === -1) mod3StartRow = Math.min(30, matrix.length);
 
-      // 1. MODUL I: VẬN HÀNH
+      // 1. MODUL I: VẬN HÀNH (Đã tích hợp bóc tách tự động khi tiêu đề tuần dính liền)
       let vhCols = { stt: 0, metric: 1, weeks: [2, 3, 4, 5], plan: 6, diff: 7 };
       for (let r = mod1StartRow; r < mod2StartRow; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        // Header detection
         if (rowText.includes("stt") && (rowText.includes("chỉ tiêu") || rowText.some(x => x.includes("chỉ tiêu") || x.includes("nội dung")))) {
           let headersRaw = row.map(c => String(c || "").trim()).filter(c => c !== "");
           if (headersRaw.length >= 4) {
-            vhHeaders = headersRaw;
             
             vhCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
             vhCols.metric = row.findIndex(c => String(c).toLowerCase().includes("chỉ tiêu") || String(c).toLowerCase().includes("nội dung"));
@@ -910,20 +896,38 @@
             if (vhCols.metric === -1) vhCols.metric = 1;
 
             vhCols.plan = row.findIndex(c => String(c).toLowerCase().trim() === "plan" || String(c).toLowerCase().includes("kế hoạch"));
-            if (vhCols.plan === -1) vhCols.plan = vhHeaders.length - 2;
+            if (vhCols.plan === -1) vhCols.plan = row.length - 2;
 
             vhCols.diff = row.findIndex(c => String(c).toLowerCase().includes("thực hiện") || String(c).includes("+ / -") || String(c).includes("+/-"));
-            if (vhCols.diff === -1) vhCols.diff = vhHeaders.length - 1;
+            if (vhCols.diff === -1) vhCols.diff = row.length - 1;
 
             vhCols.weeks = [];
-            for (let c = vhCols.metric + 1; c < vhCols.plan; c++) {
-              if (row[c] !== undefined && String(row[c]).trim() !== "") {
-                vhCols.weeks.push(c);
+            let detectedWeeks = [];
+
+            for (let c = vhCols.metric + 1; c < (vhCols.plan > vhCols.metric ? vhCols.plan : row.length); c++) {
+              let cellStr = String(row[c] || "").trim();
+              if (cellStr !== "") {
+                let matchedWeeks = cellStr.match(/(\d{2}-W\d{2}|W\d{2})/gi);
+                if (matchedWeeks && matchedWeeks.length > 1) {
+                  detectedWeeks = matchedWeeks;
+                  for (let i = 0; i < matchedWeeks.length; i++) {
+                    vhCols.weeks.push(vhCols.metric + 1 + i);
+                  }
+                  break;
+                } else {
+                  vhCols.weeks.push(c);
+                  detectedWeeks.push(cellStr);
+                }
               }
             }
-            if (vhCols.weeks.length > 0) {
-              vhWeekHeaders = vhCols.weeks.map(c => String(row[c]).trim());
+
+            if (vhCols.weeks.length === 0) {
+              vhCols.weeks = [vhCols.metric + 1, vhCols.metric + 2, vhCols.metric + 3, vhCols.metric + 4];
+              detectedWeeks = ["26-W37", "26-W38", "26-W39", "26-W40"];
             }
+
+            vhWeekHeaders = detectedWeeks;
+            vhHeaders = ["STT", "Chỉ Tiêu Vận Hành", ...vhWeekHeaders, "Plan", "+ / - Thực Hiện"];
           }
           continue;
         }
@@ -942,7 +946,6 @@
             let isStringPercent = typeof rawVal === 'string' && rawVal.includes('%');
             let numVal = parseCleanNumber(rawVal);
 
-            // Handle Excel raw fraction percentage (e.g. 0.0201 -> 2.01%)
             if (!isStringPercent && typeof rawVal === 'number' && rawVal > 0 && rawVal <= 1) {
               numVal = parseFloat((rawVal * 100).toFixed(2));
             }
@@ -990,7 +993,6 @@
         if (rowText.includes("stt") && (rowText.includes("hạng mục") || rowText.some(x => x.includes("pop") || x.includes("hạng mục")))) {
           let headersRaw = row.map(c => String(c || "").trim()).filter(c => c !== "");
           if (headersRaw.length >= 3) {
-            tkHeaders = headersRaw;
             
             tkCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
             tkCols.pop = row.findIndex(c => String(c).toLowerCase().includes("hạng mục") || String(c).toLowerCase().includes("pop"));
@@ -1006,14 +1008,27 @@
             if (tkCols.note === -1) tkCols.note = 8;
 
             tkCols.weeks = [];
+            let detectedTkWeeks = [];
             for (let c = tkCols.pop + 1; c < tkCols.total; c++) {
-              if (row[c] !== undefined && String(row[c]).trim() !== "") {
-                tkCols.weeks.push(c);
+              let cellStr = String(row[c] || "").trim();
+              if (cellStr !== "") {
+                let matched = cellStr.match(/(\d{2}-W\d{2}|W\d{2})/gi);
+                if (matched && matched.length > 1) {
+                  detectedTkWeeks = matched;
+                  for (let i = 0; i < matched.length; i++) {
+                    tkCols.weeks.push(tkCols.pop + 1 + i);
+                  }
+                  break;
+                } else {
+                  tkCols.weeks.push(c);
+                  detectedTkWeeks.push(cellStr);
+                }
               }
             }
             if (tkCols.weeks.length > 0) {
-              tkWeekHeaders = tkCols.weeks.map(c => String(row[c]).trim());
+              tkWeekHeaders = detectedTkWeeks;
             }
+            tkHeaders = ["STT", "Hạng Mục / POP", ...tkWeekHeaders, "Lũy Kế 4 Tuần", "Đơn Vị", "Ghi Chú"];
           }
           continue;
         }
@@ -1133,7 +1148,6 @@
       if (newKtItems.length > 0) dashboardData.khaithac.items = newKtItems;
       if (newKtNotes.length > 0) dashboardData.khaithac.notes = newKtNotes;
 
-      // Extract Total RA PORT TRONG THÁNG
       const m1Item = newTkItems.find(item => item.pop.toLowerCase().includes("nâng cấp port") || item.pop.toLowerCase().includes("m1") || item.pop.toLowerCase().includes("h20"));
       if (m1Item && m1Item.total) {
         dashboardData.totalPortH20 = m1Item.total;
