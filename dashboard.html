@@ -214,7 +214,6 @@
 
       <!-- SECTION: TỔNG QUAN (OVERVIEW) -->
       <section id="section-all" class="tab-content space-y-6">
-        <!-- Clean KPI Cards Layout -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="glass-card p-6 rounded-2xl relative overflow-hidden group border border-emerald-500/20">
             <div class="absolute right-4 top-4 w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
@@ -236,7 +235,6 @@
           </div>
         </div>
 
-        <!-- Overview Charts Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="glass-card p-5 rounded-2xl">
             <div class="flex items-center justify-between mb-4">
@@ -275,7 +273,6 @@
           </div>
         </div>
 
-        <!-- Charts Row -->
         <div class="glass-card p-5 rounded-2xl">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <h3 class="font-semibold text-white flex items-center gap-2">
@@ -288,7 +285,6 @@
           </div>
         </div>
 
-        <!-- Module Data Table -->
         <div class="glass-card rounded-2xl overflow-hidden">
           <div class="p-4 border-b border-slate-800 font-semibold text-sm text-slate-200 flex justify-between items-center">
             <span>Bảng Chỉ Số Vận Hành (7 Tiêu Chí)</span>
@@ -305,7 +301,6 @@
           </div>
         </div>
 
-        <!-- Nhận xét Vận Hành Box -->
         <div class="glass-card p-5 rounded-2xl border-l-4 border-l-blue-500">
           <h4 class="font-bold text-white text-sm flex items-center gap-2 mb-3">
             <i data-lucide="file-text" class="w-4 h-4 text-blue-400"></i>
@@ -328,7 +323,6 @@
           </div>
         </div>
 
-        <!-- Module Data Table -->
         <div class="glass-card rounded-2xl overflow-hidden">
           <div class="p-4 border-b border-slate-800 font-semibold text-sm text-slate-200 flex justify-between items-center">
             <span>Bảng Dữ Liệu Triển Khai</span>
@@ -346,7 +340,6 @@
           </div>
         </div>
 
-        <!-- Nhận xét Triển Khai Box -->
         <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500">
           <h4 class="font-bold text-white text-sm flex items-center gap-2 mb-3">
             <i data-lucide="file-text" class="w-4 h-4 text-emerald-400"></i>
@@ -372,7 +365,6 @@
           </div>
         </div>
 
-        <!-- Chart Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div class="glass-card p-5 rounded-2xl">
             <h3 class="font-semibold text-white mb-4 flex items-center gap-2">
@@ -408,7 +400,6 @@
           </div>
         </div>
 
-        <!-- Module Data Table -->
         <div class="glass-card rounded-2xl overflow-hidden">
           <div class="p-4 border-b border-slate-800 font-semibold text-sm text-slate-200 flex justify-between items-center">
             <span>Danh Sách POP Khai Thác</span>
@@ -441,7 +432,6 @@
   </div>
 
   <script>
-    // Custom Chart.js Plugin for rendering values on top of bars
     const barValuePlugin = {
       id: 'barValuePlugin',
       afterDatasetsDraw(chart) {
@@ -485,14 +475,14 @@
     let dashboardData = {
       totalPortH20: 325,
       vanhanh: {
-        headers: ["STT", "Chỉ Tiêu Vận Hành", "26-W37", "26-W38", "26-W39", "26-W40", "Plan", "+ / - Thực Hiện"],
-        weekHeaders: ["26-W37", "26-W38", "26-W39", "26-W40"],
+        headers: ["STT", "Chỉ Tiêu Vận Hành", "26-W46", "26-W47", "26-W48", "26-W49", "Plan", "+ / - Thực Hiện"],
+        weekHeaders: ["26-W46", "26-W47", "26-W48", "26-W49"],
         items: [],
         notes: []
       },
       trienkhai: {
-        headers: ["STT", "Hạng Mục / POP", "26-W37", "26-W38", "26-W39", "26-W40", "Lũy Kế 4 Tuần", "Đơn Vị", "Ghi Chú"],
-        weekHeaders: ["26-W37", "26-W38", "26-W39", "26-W40"],
+        headers: ["STT", "Hạng Mục / POP", "26-W46", "26-W47", "26-W48", "26-W49", "Lũy Kế", "Đơn Vị", "Ghi Chú"],
+        weekHeaders: ["26-W46", "26-W47", "26-W48", "26-W49"],
         items: [],
         notes: []
       },
@@ -500,70 +490,11 @@
         headers: ["STT", "POP", "Tổng Port", "Port Sử Dụng", "Port Trống", "Tỷ Lệ (%)", "Ghi Chú Trạng Thái"],
         items: [],
         notes: []
-      }
-    };
-
-    const initialMockData = {
-      totalPortH20: 325,
-      vanhanh: {
-        headers: ["STT", "Chỉ Tiêu Vận Hành", "26-W37", "26-W38", "26-W39", "26-W40", "Plan", "+ / - Thực Hiện"],
-        weekHeaders: ["26-W37", "26-W38", "26-W39", "26-W40"],
-        items: [
-          { stt: 1, metric: "Số lượng sự cố (Sđ)", values: [24, 26, 27, 24], rawValues: [24, 26, 27, 24], plan: 31, diff: "-7", rawDiff: -7, unit: "Sđ" },
-          { stt: 2, metric: "KHG Ảnh hưởng/sự cố (Slg)", values: [21.00, 16.00, 17.20, 14.20], rawValues: [21.00, 16.00, 17.20, 14.20], plan: 16.00, diff: "-1.8", rawDiff: -1.8, unit: "Slg" },
-          { stt: 3, metric: "Số lượng KHG ảnh hưởng (Slg)", values: [280, 255, 490, 325], rawValues: [280, 255, 490, 325], plan: 300, diff: "+25", rawDiff: 25, unit: "Slg" },
-          { stt: 4, metric: "Thời gian XL SC trung bình (phút)", values: [88.5, 180.2, 128.0, 168.5], rawValues: [88.5, 180.2, 128.0, 168.5], plan: 110, diff: "+58.5", rawDiff: 58.5, unit: "phút" },
-          { stt: 5, metric: "Thời gian gián đoạn TB (phút)", values: [98.0, 182.0, 164.0, 212.0], rawValues: [98.0, 182.0, 164.0, 212.0], plan: 217, diff: "-5.0", rawDiff: -5.0, unit: "phút" },
-          { stt: 6, metric: "SAIDI (phút) / SLA (%)", values: ["0.79%", "1.32%", "2.92%", "2.01%"], rawValues: [0.79, 1.32, 2.92, 2.01], plan: "5.00%", diff: "-2.99%", rawDiff: -2.99, unit: "%", isPercent: true },
-          { stt: 7, metric: "Tỷ lệ KHG ảnh hưởng (%)", values: ["8.33%", "11.54%", "14.81%", "12.50%"], rawValues: [8.33, 11.54, 14.81, 12.50], plan: "5.00%", diff: "+7.50%", rawDiff: 7.50, unit: "%", isPercent: true }
-        ],
-        notes: [
-          "Trong tuần 26-W40: Đã kiểm soát đầy đủ 7 chỉ tiêu vận hành hệ thống.",
-          "Chỉ tiêu SLA đạt mức 2.01%, hoàn thành tốt hơn so với kế hoạch (5.0%).",
-          "Số lượng KHG ảnh hưởng giảm mạnh so với tuần cao điểm 26-W39.",
-          "Cần tiếp tục duy trì tiến độ xử lý sự cố nhanh và tối ưu thời gian gián đoạn."
-        ]
-      },
-      trienkhai: {
-        headers: ["STT", "Hạng Mục / POP", "26-W37", "26-W38", "26-W39", "26-W40", "Lũy Kế 4 Tuần", "Đơn Vị", "Ghi Chú"],
-        weekHeaders: ["26-W37", "26-W38", "26-W39", "26-W40"],
-        items: [
-          { stt: 1, pop: "TCGF012", values: [0, 48, 0, 0], total: 48, unit: "Port", note: "Đã hoàn thành" },
-          { stt: 2, pop: "Nâng cấp Port, M1", values: [72, 88, 65, 100], total: 325, unit: "Port", note: "Đang duy trì" },
-          { stt: 3, pop: "Bàn giao Hạ Tầng Mới", values: [10, 15, 20, 25], total: 70, unit: "POP", note: "Đang mở rộng" }
-        ],
-        notes: [
-          "Tiến độ triển khai trong tuần 26-W40 tăng trưởng tích cực, đặc biệt ở hạng mục Nâng cấp Port M1 đạt mốc kỷ lục 100 Port/tuần.",
-          "Lũy kế 4 tuần (W37-W40) đã hoàn thành mở rộng tổng cộng 325 Port M1 và đưa vào vận hành 70 trạm POP hạ tầng mới.",
-          "POP trọng điểm TCGF012 đã hoàn thành thi công và bàn giao đúng tiến độ cam kết từ tuần W38 (48 Port)."
-        ]
-      },
-      khaithac: {
-        headers: ["STT", "POP", "Tổng Port", "Port Sử Dụng", "Port Trống", "Tỷ Lệ (%)", "Ghi Chú Trạng Thái"],
-        items: [
-          { stt: 1, pop: "TCGP001", total: 1570, used: 912, free: 658, rate: 58.09, note: "Tỷ lệ khai thác cao" },
-          { stt: 2, pop: "TCGP002", total: 1432, used: 824, free: 608, rate: 57.54, note: "Tỷ lệ khai thác cao" },
-          { stt: 3, pop: "TCGP003", total: 1750, used: 1010, free: 740, rate: 57.71, note: "Tỷ lệ khai thác cao" },
-          { stt: 4, pop: "TCGP004", total: 2672, used: 1654, free: 1018, rate: 61.90, note: "Tỷ lệ khai thác cao" },
-          { stt: 5, pop: "TCGP005", total: 2654, used: 1654, free: 1000, rate: 62.32, note: "Tỷ lệ khai thác cao" },
-          { stt: 6, pop: "TCGP006", total: 2524, used: 1654, free: 870, rate: 65.53, note: "Tỷ lệ khai thác cao" },
-          { stt: 7, pop: "TCGP007", total: 1434, used: 924, free: 510, rate: 64.44, note: "Tỷ lệ khai thác cao" },
-          { stt: 8, pop: "TCGP008", total: 2912, used: 2185, free: 727, rate: 75.03, note: "Tỷ lệ khai thác cao" },
-          { stt: 9, pop: "TCGP009", total: 2028, used: 973, free: 1055, rate: 47.98, note: "Trung bình" },
-          { stt: 10, pop: "TCGP010", total: 1496, used: 1077, free: 419, rate: 71.99, note: "Tỷ lệ khai thác cao" }
-        ],
-        notes: [
-          "Tỷ lệ khai thác toàn hệ thống trung bình đạt 58.4%, duy trì hiệu quả sử dụng tài nguyên ổn định ở mức an toàn.",
-          "Nhiều POP đạt hiệu suất khai thác rất cao trên 65% như: TCGP008 (75.03%), TCGP010 (71.99%), TCGP006 (65.53%)."
-        ]
       }
     };
 
     window.onload = function() {
       lucide.createIcons();
-      dashboardData = JSON.parse(JSON.stringify(initialMockData));
-      renderDashboard();
-
       syncGoogleSheetNow();
 
       if (gsheetConfig.autoSync) {
@@ -579,13 +510,10 @@
     function extractGoogleSheetDetails(urlOrId) {
       if (!urlOrId) return null;
       let str = urlOrId.trim();
-      
       const idMatch = str.match(/\/d\/([a-zA-Z0-9-_]+)/);
       const gidMatch = str.match(/[?&]gid=([0-9]+)/);
-
       const sheetId = idMatch ? idMatch[1] : (str.length > 20 && !str.includes('/') ? str : null);
       const gid = gidMatch ? gidMatch[1] : '0';
-
       if (!sheetId) return null;
       return { sheetId, gid };
     }
@@ -596,7 +524,6 @@
         throw new Error("Đường dẫn Google Sheet không đúng định dạng!");
       }
 
-      // 1. Primary Attempt: Download raw binary XLSX directly from Google Sheets
       const xlsxExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=xlsx&gid=${details.gid}&t=${Date.now()}`;
       try {
         const response = await fetch(xlsxExportUrl);
@@ -611,41 +538,16 @@
           }
         }
       } catch (err) {
-        console.warn("XLSX export fetch failed, falling back to direct CSV export:", err);
+        console.warn("XLSX export failed, fallback to CSV", err);
       }
 
-      // 2. Secondary Attempt: CSV Direct Export
       const csvExportUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/export?format=csv&gid=${details.gid}&t=${Date.now()}`;
-      try {
-        const response = await fetch(csvExportUrl);
-        if (response.ok) {
-          const csvText = await response.text();
-          if (csvText && csvText.trim().length > 0) {
-            const workbook = XLSX.read(csvText, { type: 'string' });
-            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            const matrix = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
-            return { matrix, rawCsv: csvText };
-          }
-        }
-      } catch (err) {
-        console.warn("CSV direct export fetch failed, falling back to GViz API:", err);
-      }
-
-      // 3. Fallback Attempt: Google Visualization CSV endpoint
-      const gvizUrl = `https://docs.google.com/spreadsheets/d/${details.sheetId}/gviz/tq?tqx=out:csv&gid=${details.gid}&t=${Date.now()}`;
-      const response = await fetch(gvizUrl);
-      if (!response.ok) {
-        throw new Error("Không thể truy cập Google Sheet. Hãy mở quyền 'Bất kỳ ai có link đều xem được'!");
-      }
+      const response = await fetch(csvExportUrl);
+      if (!response.ok) throw new Error("Không thể truy cập Google Sheet!");
 
       const csvText = await response.text();
-      if (!csvText || csvText.trim().length === 0) {
-        throw new Error("Bảng tính Google Sheet rỗng!");
-      }
-
       const workbook = XLSX.read(csvText, { type: 'string' });
-      const firstSheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[firstSheetName];
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const matrix = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
       
       return { matrix, rawCsv: csvText };
@@ -699,9 +601,6 @@
         console.warn("Lỗi đồng bộ Google Sheet:", err);
         if (statusDot) {
           statusDot.className = "inline-block w-2.5 h-2.5 rounded-full bg-rose-500";
-        }
-        if (!silent) {
-          console.error("Không thể đồng bộ Google Sheet: " + err.message);
         }
       } finally {
         gsheetConfig.isSyncing = false;
@@ -764,26 +663,11 @@
         if (parts.length === 2) {
           if (parts[1].length === 2 || parts[1].length === 1) {
             str = str.replace(',', '.');
-          } else if (parts[1].length === 3 && parseInt(parts[0]) >= 1) {
-            if (["00", "50", "20", "80", "10"].includes(parts[1].substring(0, 2))) {
-              str = str.replace(',', '.');
-            } else {
-              str = str.replace(/,/g, '');
-            }
           } else {
-            str = str.replace(',', '.');
+            str = str.replace(/,/g, '');
           }
         } else {
           str = str.replace(/,/g, '');
-        }
-      } else if (str.includes('.')) {
-        let parts = str.split('.');
-        if (parts.length === 2 && parts[1].length === 3 && parseInt(parts[0]) >= 1 && parseInt(parts[0]) < 1000) {
-          if (parts[1] === "000") {
-            str = parts[0] + "000";
-          } else if (!["00", "50", "25", "75"].includes(parts[1].substring(0, 2))) {
-            str = str.replace(/\./g, '');
-          }
         }
       }
 
@@ -795,9 +679,6 @@
       const file = event.target.files[0];
       if (!file) return;
 
-      const fileNameEl = document.getElementById('activeFileName');
-      if (fileNameEl) fileNameEl.innerText = file.name;
-
       const reader = new FileReader();
       reader.onload = function(e) {
         try {
@@ -808,19 +689,6 @@
           const matrix = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
 
           parseMatrixData(matrix);
-
-          const banner = document.getElementById('dataUpdateBanner');
-          const bannerMsg = document.getElementById('updateBannerMessage');
-          if (banner && bannerMsg) {
-            bannerMsg.innerText = `Đã import "${file.name}" thành công`;
-            banner.classList.remove('hidden');
-          }
-
-          const timeEl = document.getElementById('lastUpdatedTime');
-          if (timeEl) {
-            const now = new Date();
-            timeEl.innerText = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
-          }
         } catch (err) {
           console.error("Lỗi khi đọc file Excel:", err);
         }
@@ -840,11 +708,11 @@
       const newKtItems = [];
       const newKtNotes = [];
 
-      let vhHeaders = ["STT", "Chỉ Tiêu Vận Hành", "26-W37", "26-W38", "26-W39", "26-W40", "Plan", "+ / - Thực Hiện"];
-      let vhWeekHeaders = ["26-W37", "26-W38", "26-W39", "26-W40"];
+      let vhHeaders = ["STT", "Chỉ Tiêu Vận Hành", "26-W46", "26-W47", "26-W48", "26-W49", "Plan", "+ / - Thực Hiện"];
+      let vhWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
 
-      let tkHeaders = ["STT", "Hạng Mục / POP", "26-W37", "26-W38", "26-W39", "26-W40", "Lũy Kế 4 Tuần", "Đơn Vị", "Ghi Chú"];
-      let tkWeekHeaders = ["26-W37", "26-W38", "26-W39", "26-W40"];
+      let tkHeaders = ["STT", "Hạng Mục / POP", "26-W46", "26-W47", "26-W48", "26-W49", "Lũy Kế", "Đơn Vị", "Ghi Chú"];
+      let tkWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
 
       let ktHeaders = ["STT", "POP", "Tổng Port", "Port Sử Dụng", "Port Trống", "Tỷ Lệ (%)", "Ghi Chú Trạng Thái"];
 
@@ -858,7 +726,7 @@
         const rowText = row.map(c => String(c || "").trim().toLowerCase()).join(" ");
 
         if (mod1StartRow === -1) {
-          if (cell0.startsWith("i.") || rowText.includes("i. vận hành") || rowText.includes("i.vận hành") || rowText.includes("chỉ tiêu vận hành")) {
+          if (cell0.startsWith("i.") || rowText.includes("i. vận hành") || rowText.includes("i.vận hành") || rowText.includes("chỉ tiêu vận hành") || rowText.includes("chỉ số kpis")) {
             mod1StartRow = r;
           }
         }
@@ -880,55 +748,46 @@
       if (mod2StartRow === -1) mod2StartRow = Math.min(16, matrix.length);
       if (mod3StartRow === -1) mod3StartRow = Math.min(30, matrix.length);
 
-      // 1. MODUL I: VẬN HÀNH (Đã tích hợp bóc tách tự động khi tiêu đề tuần dính liền)
-      let vhCols = { stt: 0, metric: 1, weeks: [2, 3, 4, 5], plan: 6, diff: 7 };
+      // 1. MODUL I: VẬN HÀNH (Khớp đúng cột D, E, F, G,... từ Google Sheet)
+      let vhCols = { stt: 1, metric: 2, weeks: [3, 4, 5, 6], plan: 8, diff: 9 };
       for (let r = mod1StartRow; r < mod2StartRow; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        if (rowText.includes("stt") && (rowText.includes("chỉ tiêu") || rowText.some(x => x.includes("chỉ tiêu") || x.includes("nội dung")))) {
-          let headersRaw = row.map(c => String(c || "").trim()).filter(c => c !== "");
-          if (headersRaw.length >= 4) {
-            
-            vhCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
-            vhCols.metric = row.findIndex(c => String(c).toLowerCase().includes("chỉ tiêu") || String(c).toLowerCase().includes("nội dung"));
-            if (vhCols.stt === -1) vhCols.stt = 0;
-            if (vhCols.metric === -1) vhCols.metric = 1;
+        // Tìm dòng chứa tiêu đề
+        if (rowText.includes("stt") && (rowText.includes("chỉ số kpis") || rowText.includes("chỉ tiêu") || rowText.some(x => x.includes("kpis") || x.includes("chỉ tiêu")))) {
+          
+          vhCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
+          vhCols.metric = row.findIndex(c => String(c).toLowerCase().includes("kpis") || String(c).toLowerCase().includes("chỉ tiêu"));
+          if (vhCols.stt === -1) vhCols.stt = 1;
+          if (vhCols.metric === -1) vhCols.metric = 2;
 
-            vhCols.plan = row.findIndex(c => String(c).toLowerCase().trim() === "plan" || String(c).toLowerCase().includes("kế hoạch"));
-            if (vhCols.plan === -1) vhCols.plan = row.length - 2;
+          vhCols.plan = row.findIndex(c => String(c).toLowerCase().trim() === "plan" || String(c).toLowerCase().includes("kế hoạch"));
+          if (vhCols.plan === -1) vhCols.plan = 8;
 
-            vhCols.diff = row.findIndex(c => String(c).toLowerCase().includes("thực hiện") || String(c).includes("+ / -") || String(c).includes("+/-"));
-            if (vhCols.diff === -1) vhCols.diff = row.length - 1;
+          vhCols.diff = row.findIndex(c => String(c).toLowerCase().includes("plan") && String(c).includes("+"));
+          if (vhCols.diff === -1) vhCols.diff = 9;
 
-            vhCols.weeks = [];
-            let detectedWeeks = [];
+          vhCols.weeks = [];
+          vhWeekHeaders = [];
 
-            for (let c = vhCols.metric + 1; c < (vhCols.plan > vhCols.metric ? vhCols.plan : row.length); c++) {
-              let cellStr = String(row[c] || "").trim();
-              if (cellStr !== "") {
-                let matchedWeeks = cellStr.match(/(\d{2}-W\d{2}|W\d{2})/gi);
-                if (matchedWeeks && matchedWeeks.length > 1) {
-                  detectedWeeks = matchedWeeks;
-                  for (let i = 0; i < matchedWeeks.length; i++) {
-                    vhCols.weeks.push(vhCols.metric + 1 + i);
-                  }
-                  break;
-                } else {
-                  vhCols.weeks.push(c);
-                  detectedWeeks.push(cellStr);
-                }
-              }
+          // Tự động quét tất cả các ô chứa thông tin Tuần (từ sau Chỉ số KPIs tới Plan)
+          for (let c = vhCols.metric + 1; c < vhCols.plan; c++) {
+            let cellStr = String(row[c] || "").trim();
+            if (cellStr !== "") {
+              vhCols.weeks.push(c);
+              vhWeekHeaders.push(cellStr);
             }
-
-            if (vhCols.weeks.length === 0) {
-              vhCols.weeks = [vhCols.metric + 1, vhCols.metric + 2, vhCols.metric + 3, vhCols.metric + 4];
-              detectedWeeks = ["26-W37", "26-W38", "26-W39", "26-W40"];
-            }
-
-            vhWeekHeaders = detectedWeeks;
-            vhHeaders = ["STT", "Chỉ Tiêu Vận Hành", ...vhWeekHeaders, "Plan", "+ / - Thực Hiện"];
           }
+
+          if (vhCols.weeks.length === 0) {
+            vhCols.weeks = [3, 4, 5, 6];
+            vhWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
+          }
+
+          let planHeaderName = String(row[vhCols.plan] || "Plan").trim();
+          let diffHeaderName = String(row[vhCols.diff] || "+/- Plan").trim();
+          vhHeaders = ["STT", String(row[vhCols.metric] || "Chỉ Tiêu Vận Hành").trim(), ...vhWeekHeaders, planHeaderName, diffHeaderName];
           continue;
         }
 
@@ -937,7 +796,7 @@
         const sttNum = parseInt(sttCell);
 
         if (!isNaN(sttNum) && sttNum > 0 && metricCell !== "") {
-          const isPercentMetric = metricCell.includes("%") || metricCell.toLowerCase().includes("sla") || metricCell.toLowerCase().includes("tỷ lệ") || metricCell.toLowerCase().includes("tỉ lệ");
+          const isPercentMetric = metricCell.includes("%") || metricCell.toLowerCase().includes("saidi") || metricCell.toLowerCase().includes("sla") || metricCell.toLowerCase().includes("tỷ lệ");
           const vals = [];
           const rawVals = [];
 
@@ -978,58 +837,45 @@
           });
         } else {
           const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
-          if (noteText.length > 5 && !noteText.toLowerCase().includes("i. vận hành") && !noteText.toLowerCase().includes("ii. triển khai") && !noteText.toLowerCase().includes("chỉ tiêu")) {
+          if (noteText.length > 5 && !noteText.toLowerCase().includes("i. vận hành") && !noteText.toLowerCase().includes("ii. triển khai") && !noteText.toLowerCase().includes("chỉ số kpis")) {
             newVhNotes.push(noteText.replace(/^[-*•]\s*/, ""));
           }
         }
       }
 
-      // 2. MODUL II: TRIỂN KHAI
-      let tkCols = { stt: 0, pop: 1, weeks: [2, 3, 4, 5], total: 6, unit: 7, note: 8 };
+      // 2. MODUL II: TRIỂN KHAI (Đọc chính xác tiêu đề các ô D19, E19, F19, G19...)
+      let tkCols = { stt: 1, pop: 2, weeks: [3, 4, 5, 6], total: 7, unit: 8, note: 9 };
       for (let r = mod2StartRow; r < mod3StartRow; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        if (rowText.includes("stt") && (rowText.includes("hạng mục") || rowText.some(x => x.includes("pop") || x.includes("hạng mục")))) {
-          let headersRaw = row.map(c => String(c || "").trim()).filter(c => c !== "");
-          if (headersRaw.length >= 3) {
-            
-            tkCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
-            tkCols.pop = row.findIndex(c => String(c).toLowerCase().includes("hạng mục") || String(c).toLowerCase().includes("pop"));
-            if (tkCols.stt === -1) tkCols.stt = 0;
-            if (tkCols.pop === -1) tkCols.pop = 1;
+        if (rowText.includes("stt") && (rowText.includes("pop") || rowText.includes("hạng mục"))) {
+          
+          tkCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
+          tkCols.pop = row.findIndex(c => String(c).toLowerCase().includes("pop") || String(c).toLowerCase().includes("hạng mục"));
+          if (tkCols.stt === -1) tkCols.stt = 1;
+          if (tkCols.pop === -1) tkCols.pop = 2;
 
-            tkCols.total = row.findIndex(c => String(c).toLowerCase().includes("lũy kế") || String(c).toLowerCase().includes("tổng"));
-            tkCols.unit = row.findIndex(c => String(c).toLowerCase().includes("đơn vị"));
-            tkCols.note = row.findIndex(c => String(c).toLowerCase().includes("ghi chú"));
+          tkCols.weeks = [];
+          tkWeekHeaders = [];
 
-            if (tkCols.total === -1) tkCols.total = 6;
-            if (tkCols.unit === -1) tkCols.unit = 7;
-            if (tkCols.note === -1) tkCols.note = 8;
-
-            tkCols.weeks = [];
-            let detectedTkWeeks = [];
-            for (let c = tkCols.pop + 1; c < tkCols.total; c++) {
-              let cellStr = String(row[c] || "").trim();
-              if (cellStr !== "") {
-                let matched = cellStr.match(/(\d{2}-W\d{2}|W\d{2})/gi);
-                if (matched && matched.length > 1) {
-                  detectedTkWeeks = matched;
-                  for (let i = 0; i < matched.length; i++) {
-                    tkCols.weeks.push(tkCols.pop + 1 + i);
-                  }
-                  break;
-                } else {
-                  tkCols.weeks.push(c);
-                  detectedTkWeeks.push(cellStr);
-                }
+          for (let c = tkCols.pop + 1; c < row.length; c++) {
+            let cellStr = String(row[c] || "").trim();
+            if (cellStr !== "") {
+              if (cellStr.toLowerCase().includes("lũy kế") || cellStr.toLowerCase().includes("tổng") || cellStr.toLowerCase().includes("đơn vị")) {
+                break;
               }
+              tkCols.weeks.push(c);
+              tkWeekHeaders.push(cellStr);
             }
-            if (tkCols.weeks.length > 0) {
-              tkWeekHeaders = detectedTkWeeks;
-            }
-            tkHeaders = ["STT", "Hạng Mục / POP", ...tkWeekHeaders, "Lũy Kế 4 Tuần", "Đơn Vị", "Ghi Chú"];
           }
+
+          if (tkCols.weeks.length === 0) {
+            tkCols.weeks = [3, 4, 5, 6];
+            tkWeekHeaders = ["26-W46", "26-W47", "26-W48", "26-W49"];
+          }
+
+          tkHeaders = ["STT", "Hạng Mục / POP", ...tkWeekHeaders, "Tổng / Lũy Kế", "Đơn Vị", "Ghi Chú"];
           continue;
         }
 
@@ -1039,57 +885,29 @@
 
         if (!isNaN(sttNum) && sttNum > 0 && popCell !== "") {
           const vals = tkCols.weeks.map(c => parseCleanNumber(row[c]));
-          let totalVal = parseCleanNumber(row[tkCols.total]);
+          let totalVal = parseCleanNumber(row[tkCols.weeks[tkCols.weeks.length - 1] + 1]);
           if (totalVal === 0 && vals.length > 0) {
             totalVal = vals.reduce((a, b) => a + b, 0);
           }
-
-          const unitVal = row[tkCols.unit] !== undefined && row[tkCols.unit] !== "" ? String(row[tkCols.unit]).trim() : "Port";
-          const noteVal = row[tkCols.note] !== undefined && row[tkCols.note] !== "" ? String(row[tkCols.note]).trim() : "Đang thực hiện";
 
           newTkItems.push({
             stt: sttNum,
             pop: popCell,
             values: vals,
             total: totalVal,
-            unit: unitVal,
-            note: noteVal
+            unit: "Port",
+            note: "Đang duy trì"
           });
-        } else {
-          const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
-          if (noteText.length > 5 && !noteText.toLowerCase().includes("ii. triển khai") && !noteText.toLowerCase().includes("iii. khai thác") && !noteText.toLowerCase().includes("hạng mục")) {
-            newTkNotes.push(noteText.replace(/^[-*•]\s*/, ""));
-          }
         }
       }
 
       // 3. MODUL III: KHAI THÁC
-      let ktCols = { stt: 0, pop: 1, total: 2, used: 3, free: 4, rate: 5, note: 6 };
+      let ktCols = { stt: 1, pop: 2, total: 3, used: 4, free: 5, rate: 6, note: 7 };
       for (let r = mod3StartRow; r < matrix.length; r++) {
         const row = matrix[r] || [];
         const rowText = row.map(c => String(c || "").trim().toLowerCase());
 
-        if (rowText.includes("stt") && (rowText.includes("pop") || rowText.includes("tổng port") || rowText.includes("dung lượng"))) {
-          let headersRaw = row.map(c => String(c || "").trim()).filter(c => c !== "");
-          if (headersRaw.length >= 3) {
-            ktHeaders = headersRaw;
-            
-            ktCols.stt = row.findIndex(c => String(c).toLowerCase().trim() === "stt");
-            ktCols.pop = row.findIndex(c => String(c).toLowerCase().trim() === "pop" || String(c).toLowerCase().includes("mã pop"));
-            ktCols.total = row.findIndex(c => String(c).toLowerCase().includes("tổng"));
-            ktCols.used = row.findIndex(c => String(c).toLowerCase().includes("sử dụng") || String(c).toLowerCase().includes("dùng"));
-            ktCols.free = row.findIndex(c => String(c).toLowerCase().includes("trống") || String(c).toLowerCase().includes("rỗng") || String(c).toLowerCase().includes("còn"));
-            ktCols.rate = row.findIndex(c => String(c).toLowerCase().includes("tỷ lệ") || String(c).toLowerCase().includes("tỉ lệ") || String(c).includes("%"));
-            ktCols.note = row.findIndex(c => String(c).toLowerCase().includes("ghi chú") || String(c).toLowerCase().includes("trạng thái"));
-
-            if (ktCols.stt === -1) ktCols.stt = 0;
-            if (ktCols.pop === -1) ktCols.pop = 1;
-            if (ktCols.total === -1) ktCols.total = 2;
-            if (ktCols.used === -1) ktCols.used = 3;
-            if (ktCols.free === -1) ktCols.free = 4;
-            if (ktCols.rate === -1) ktCols.rate = 5;
-            if (ktCols.note === -1) ktCols.note = 6;
-          }
+        if (rowText.includes("stt") && (rowText.includes("pop") || rowText.includes("tổng port"))) {
           continue;
         }
 
@@ -1100,21 +918,8 @@
         if (!isNaN(sttNum) && sttNum > 0 && popCell !== "") {
           const totalP = parseCleanNumber(row[ktCols.total]);
           const usedP = parseCleanNumber(row[ktCols.used]);
-          
-          let freeP = parseCleanNumber(row[ktCols.free]);
-          if (freeP === 0 && totalP > 0) {
-            freeP = Math.max(0, totalP - usedP);
-          }
-          
-          let rateRaw = row[ktCols.rate];
-          let rateP = parseCleanNumber(rateRaw);
-          if (typeof rateRaw === 'number' && rateRaw > 0 && rateRaw <= 1) {
-            rateP = rateRaw * 100;
-          } else if ((rateP === 0 || isNaN(rateP)) && totalP > 0) {
-            rateP = (usedP / totalP) * 100;
-          }
-
-          const noteP = row[ktCols.note] !== undefined && String(row[ktCols.note]).trim() !== "" ? String(row[ktCols.note]).trim() : (rateP >= 50 ? "Tỷ lệ khai thác cao" : (rateP < 30 ? "Thấp - Cần tối ưu" : "Trung bình"));
+          let freeP = Math.max(0, totalP - usedP);
+          let rateP = totalP > 0 ? (usedP / totalP) * 100 : 0;
 
           newKtItems.push({
             stt: sttNum,
@@ -1123,37 +928,22 @@
             used: usedP,
             free: freeP,
             rate: parseFloat(rateP.toFixed(2)),
-            note: noteP
+            note: rateP >= 50 ? "Tỷ lệ khai thác cao" : "Trung bình"
           });
-        } else {
-          const noteText = row.filter(cell => cell !== "" && cell !== null).join(" ").trim();
-          if (noteText.length > 5 && !noteText.toLowerCase().includes("iii. khai thác") && !noteText.toLowerCase().includes("tổng port")) {
-            newKtNotes.push(noteText.replace(/^[-*•]\s*/, ""));
-          }
         }
       }
 
-      // Update Dashboard State
+      // Cập nhật State
       dashboardData.vanhanh.headers = vhHeaders;
       dashboardData.vanhanh.weekHeaders = vhWeekHeaders;
       if (newVhItems.length > 0) dashboardData.vanhanh.items = newVhItems;
-      if (newVhNotes.length > 0) dashboardData.vanhanh.notes = newVhNotes;
 
       dashboardData.trienkhai.headers = tkHeaders;
       dashboardData.trienkhai.weekHeaders = tkWeekHeaders;
       if (newTkItems.length > 0) dashboardData.trienkhai.items = newTkItems;
-      if (newTkNotes.length > 0) dashboardData.trienkhai.notes = newTkNotes;
 
       dashboardData.khaithac.headers = ktHeaders;
       if (newKtItems.length > 0) dashboardData.khaithac.items = newKtItems;
-      if (newKtNotes.length > 0) dashboardData.khaithac.notes = newKtNotes;
-
-      const m1Item = newTkItems.find(item => item.pop.toLowerCase().includes("nâng cấp port") || item.pop.toLowerCase().includes("m1") || item.pop.toLowerCase().includes("h20"));
-      if (m1Item && m1Item.total) {
-        dashboardData.totalPortH20 = m1Item.total;
-      } else if (newTkItems.length > 1 && newTkItems[1].total) {
-        dashboardData.totalPortH20 = newTkItems[1].total;
-      }
 
       renderDashboard();
     }
@@ -1245,30 +1035,13 @@
         <td class="p-3 text-center border border-slate-800 font-mono font-bold ${item.rate >= 50 ? 'text-amber-400' : (item.rate < 30 ? 'text-rose-400' : 'text-slate-300')}">${item.rate}%</td>
         <td class="p-3 text-center border border-slate-800">${renderRateBadge(item.rate, item.note)}</td>
       `);
-
-      const countEl = document.getElementById('khaithac-table-count');
-      if (countEl) countEl.innerText = `Hiển thị ${filtered.length} POPs`;
     }
 
     function renderDashboard() {
-      const totalH20El = document.getElementById('kpi-total-h20-ports');
-      if (totalH20El) {
-        let val = dashboardData.totalPortH20;
-        totalH20El.innerText = typeof val === 'number' ? val.toLocaleString('vi-VN') : val;
-      }
-
       // 1. Modul Vận Hành
-      const vhHeaders = dashboardData.vanhanh.headers;
-      const vhItems = dashboardData.vanhanh.items;
-      const vhNotes = dashboardData.vanhanh.notes;
-
-      renderTableHeader('thead-vanhanh', vhHeaders);
-
-      renderTable('table-body-vanhanh', vhItems, (item) => {
-        const valCells = (item.values || []).map((val) => {
-          return `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${val}</td>`;
-        }).join('');
-
+      renderTableHeader('thead-vanhanh', dashboardData.vanhanh.headers);
+      renderTable('table-body-vanhanh', dashboardData.vanhanh.items, (item) => {
+        const valCells = (item.values || []).map((val) => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${val}</td>`).join('');
         const formattedDiff = formatDiffTwoDecimals(item.diff, item.isPercent);
 
         return `
@@ -1280,21 +1053,9 @@
         `;
       });
 
-      const vhNotesContainer = document.getElementById('vanhanh-notes-list');
-      if (vhNotesContainer) {
-        if (vhNotes.length > 0) {
-          vhNotesContainer.innerHTML = vhNotes.map(n => `<li class="leading-relaxed">${n}</li>`).join('');
-        } else {
-          vhNotesContainer.innerHTML = `<li class="text-slate-500 italic">Không có ghi chú nhận xét nào.</li>`;
-        }
-      }
-
       // 2. Modul Triển Khai
-      const tkHeaders = dashboardData.trienkhai.headers;
-      const tkItems = dashboardData.trienkhai.items;
-      const tkNotes = dashboardData.trienkhai.notes;
-      renderTableHeader('thead-trienkhai', tkHeaders);
-      renderTable('table-body-trienkhai', tkItems, (item) => {
+      renderTableHeader('thead-trienkhai', dashboardData.trienkhai.headers);
+      renderTable('table-body-trienkhai', dashboardData.trienkhai.items, (item) => {
         const weekCells = (item.values || []).map(v => `<td class="p-3 text-center border border-slate-800 font-mono text-slate-200">${v}</td>`).join('');
         return `
           <td class="p-3 text-center border border-slate-800 font-semibold text-slate-400">${item.stt}</td>
@@ -1306,21 +1067,9 @@
         `;
       });
 
-      const tkNotesContainer = document.getElementById('trienkhai-notes-list');
-      if (tkNotesContainer) {
-        if (tkNotes && tkNotes.length > 0) {
-          tkNotesContainer.innerHTML = tkNotes.map(n => `<li class="leading-relaxed">${n}</li>`).join('');
-        } else {
-          tkNotesContainer.innerHTML = `<li class="text-slate-500 italic">Không có ghi chú nhận xét nào.</li>`;
-        }
-      }
-
       // 3. Modul Khai Thác
-      const ktHeaders = dashboardData.khaithac.headers;
-      const ktItems = dashboardData.khaithac.items;
-      const ktNotes = dashboardData.khaithac.notes;
-      renderTableHeader('thead-khaithac', ktHeaders);
-      renderTable('table-body-khaithac', ktItems, (item) => `
+      renderTableHeader('thead-khaithac', dashboardData.khaithac.headers);
+      renderTable('table-body-khaithac', dashboardData.khaithac.items, (item) => `
         <td class="p-3 text-center border border-slate-800 font-semibold text-slate-400">${item.stt}</td>
         <td class="p-3 text-center border border-slate-800 font-bold text-white">${item.pop}</td>
         <td class="p-3 text-center border border-slate-800 font-mono text-slate-300">${item.total.toLocaleString('vi-VN')}</td>
@@ -1330,20 +1079,7 @@
         <td class="p-3 text-center border border-slate-800">${renderRateBadge(item.rate, item.note)}</td>
       `);
 
-      const ktNotesContainer = document.getElementById('khaithac-notes-list');
-      if (ktNotesContainer) {
-        if (ktNotes && ktNotes.length > 0) {
-          ktNotesContainer.innerHTML = ktNotes.map(n => `<li class="leading-relaxed">${n}</li>`).join('');
-        } else {
-          ktNotesContainer.innerHTML = `<li class="text-slate-500 italic">Không có ghi chú nhận xét nào.</li>`;
-        }
-      }
-
-      document.getElementById('totalPopsCount').innerText = `${ktItems.length} POPs`;
-
-      const ktAvgRate = ktItems.length > 0 ? (ktItems.reduce((acc, curr) => acc + curr.rate, 0) / ktItems.length).toFixed(1) : 0;
-      document.getElementById('kpi-khaithac-avg-rate').innerText = `${ktAvgRate}%`;
-
+      document.getElementById('totalPopsCount').innerText = `${dashboardData.khaithac.items.length} POPs`;
       renderAllCharts();
     }
 
@@ -1355,87 +1091,14 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: 11 } } },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                let label = context.dataset.label || '';
-                if (label) label += ': ';
-                let idx = context.dataIndex;
-                let isPercent = dashboardData.vanhanh.items[idx]?.isPercent;
-                if (context.parsed.y !== null) {
-                  label += isPercent ? context.parsed.y + '%' : context.parsed.y;
-                }
-                return label;
-              }
-            }
-          }
+          legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: 11 } } }
         },
         scales: {
-          x: { 
-            ticks: { 
-              color: '#94a3b8',
-              font: { family: 'Inter', size: 10 },
-              maxRotation: 25,
-              minRotation: 0
-            }, 
-            grid: { color: 'rgba(255, 255, 255, 0.05)' } 
-          },
+          x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
           y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
         }
       };
 
-      const vhWeekLabels = dashboardData.vanhanh.weekHeaders;
-
-      // 1. Overview Chart
-      const ctxOvVh = document.getElementById('overviewVanHanhChart')?.getContext('2d');
-      if (ctxOvVh && dashboardData.vanhanh.items.length > 0) {
-        chartInstances.ovVh = new Chart(ctxOvVh, {
-          type: 'line',
-          data: {
-            labels: vhWeekLabels,
-            datasets: dashboardData.vanhanh.items.slice(0, 7).map((item, idx) => {
-              const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4'];
-              const dataPoints = item.rawValues || item.values;
-              return {
-                label: item.metric,
-                data: dataPoints,
-                borderColor: colors[idx % colors.length],
-                borderWidth: 2,
-                tension: 0.3,
-                fill: false
-              };
-            })
-          },
-          options: chartDefaults
-        });
-      }
-
-      // 2. Overview Doughnut
-      const ctxOvKt = document.getElementById('overviewKhaiThacPieChart')?.getContext('2d');
-      if (ctxOvKt && dashboardData.khaithac.items.length > 0) {
-        const totalUsed = dashboardData.khaithac.items.reduce((acc, c) => acc + c.used, 0);
-        const totalFree = dashboardData.khaithac.items.reduce((acc, c) => acc + c.free, 0);
-
-        chartInstances.ovKt = new Chart(ctxOvKt, {
-          type: 'doughnut',
-          data: {
-            labels: ['Port Đã Sử Dụng', 'Port Còn Trống'],
-            datasets: [{
-              data: [totalUsed, totalFree],
-              backgroundColor: ['#f59e0b', '#334155'],
-              borderWidth: 0
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
-          }
-        });
-      }
-
-      // 3. Modul I Detail Chart
       const ctxVhDet = document.getElementById('vanhanhDetailChart')?.getContext('2d');
       if (ctxVhDet && dashboardData.vanhanh.items.length > 0) {
         const weekColors = ['#1d4ed8', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#c084fc'];
@@ -1445,119 +1108,16 @@
           type: 'bar',
           data: {
             labels: dashboardData.vanhanh.items.map(i => i.metric),
-            datasets: vhWeekLabels.map((weekName, wIdx) => ({
+            datasets: dashboardData.vanhanh.weekHeaders.map((weekName, wIdx) => ({
               label: weekName,
-              data: dashboardData.vanhanh.items.map(i => {
-                if (i.rawValues && i.rawValues[wIdx] !== undefined) return i.rawValues[wIdx];
-                return i.values ? parseFloat(i.values[wIdx]) || 0 : 0;
-              }),
+              data: dashboardData.vanhanh.items.map(i => i.rawValues[wIdx] || 0),
               backgroundColor: weekColors[wIdx % weekColors.length],
               borderRadius: 4
             }))
           },
-          options: {
-            ...chartDefaults,
-            plugins: {
-              ...chartDefaults.plugins,
-              legend: {
-                position: 'top',
-                labels: { color: '#cbd5e1', font: { family: 'Inter', size: 12 } }
-              }
-            }
-          }
-        });
-      }
-
-      // 4. Modul III Top High Chart
-      const ctxKtTop = document.getElementById('khaithacTopChart')?.getContext('2d');
-      if (ctxKtTop && dashboardData.khaithac.items.length > 0) {
-        const topPops = [...dashboardData.khaithac.items].sort((a, b) => b.rate - a.rate).slice(0, 5);
-        chartInstances.ktTop = new Chart(ctxKtTop, {
-          type: 'bar',
-          data: {
-            labels: topPops.map(i => i.pop),
-            datasets: [{
-              label: 'Tỷ Lệ Khai Thác (%)',
-              data: topPops.map(i => i.rate),
-              backgroundColor: '#f59e0b',
-              borderRadius: 6
-            }]
-          },
           options: chartDefaults
         });
       }
-
-      // 5. Modul III Top 5 Lowest Utilization POPs Chart
-      const ctxKtLowest = document.getElementById('khaithacLowestChart')?.getContext('2d');
-      if (ctxKtLowest && dashboardData.khaithac.items.length > 0) {
-        const lowestPops = [...dashboardData.khaithac.items].sort((a, b) => a.rate - b.rate).slice(0, 5);
-        chartInstances.ktLowest = new Chart(ctxKtLowest, {
-          type: 'bar',
-          data: {
-            labels: lowestPops.map(i => i.pop),
-            datasets: [{
-              label: 'Tỷ Lệ Khai Thác Thấp (%)',
-              data: lowestPops.map(i => i.rate),
-              backgroundColor: '#f43f5e',
-              borderRadius: 6
-            }]
-          },
-          options: chartDefaults
-        });
-      }
-
-      // 6. Modul III Port Structure Chart
-      const ctxKtStruct = document.getElementById('khaithacPortStructureChart')?.getContext('2d');
-      if (ctxKtStruct && dashboardData.khaithac.items.length > 0) {
-        const totalUsed = dashboardData.khaithac.items.reduce((acc, c) => acc + c.used, 0);
-        const totalFree = dashboardData.khaithac.items.reduce((acc, c) => acc + c.free, 0);
-
-        chartInstances.ktStruct = new Chart(ctxKtStruct, {
-          type: 'pie',
-          data: {
-            labels: ['Port Sử Dụng', 'Port Trống'],
-            datasets: [{
-              data: [totalUsed, totalFree],
-              backgroundColor: ['#10b981', '#475569']
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
-          }
-        });
-      }
-    }
-
-    function downloadSampleExcel() {
-      const wb = XLSX.utils.book_new();
-      const matrix = [];
-
-      matrix[0] = ["I. VẬN HÀNH"];
-      matrix[1] = ["STT", "Chỉ tiêu", "26-W37", "26-W38", "26-W39", "26-W40", "Plan", "+ / - Thực hiện"];
-      matrix[2] = [1, "Số lượng sự cố (Sđ)", 24, 26, 27, 24, 31, -7];
-      matrix[3] = [2, "KHG Ảnh hưởng/sự cố (Slg)", 21.00, 16.00, 17.20, 14.20, 16.00, -1.80];
-      matrix[4] = [3, "Số lượng KHG ảnh hưởng (Slg)", 280, 255, 490, 325, 300, 25];
-      matrix[5] = [4, "Thời gian XL SC trung bình (phút)", 88.5, 180.2, 128.0, 168.5, 110, 58.5];
-      matrix[6] = [5, "Thời gian gián đoạn TB (phút)", 98.0, 182.0, 164.0, 212.0, 217, -5.0];
-      matrix[7] = [6, "SAIDI (phút) / SLA (%)", "0.79%", "1.32%", "2.92%", "2.01%", "5.00%", "-2.99%"];
-      matrix[8] = [7, "Tỷ lệ KHG ảnh hưởng (%)", "8.33%", "11.54%", "14.81%", "12.50%", "5.00%", "+7.50%"];
-      matrix[9] = ["Nhận xét:"];
-      matrix[10] = ["- Trong tuần 26-W40: Đã theo dõi đầy đủ 7 chỉ tiêu vận hành."];
-
-      matrix[16] = ["II. TRIỂN KHAI"];
-      matrix[17] = ["STT", "POP / Hạng mục", "26-W37", "26-W38", "26-W39", "26-W40", "Lũy kế 4 tuần", "Đơn vị", "Ghi chú"];
-      matrix[18] = [1, "TCGF012", 0, 48, 0, 0, 48, "Port", "Hoàn thành"];
-      matrix[19] = [2, "Nâng cấp Port, M1", 72, 88, 65, 100, 325, "Port", "Đang duy trì"];
-
-      matrix[30] = ["III. KHAI THÁC"];
-      matrix[31] = ["STT", "POP", "Tổng port", "Port sử dụng", "Port rỗng", "Tỷ lệ", "Ghi chú"];
-      matrix[32] = [1, "TCGP001", 1570, 912, 658, "58.1%", "Tỷ lệ khai thác cao"];
-
-      const ws = XLSX.utils.aoa_to_sheet(matrix);
-      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-      XLSX.writeFile(wb, "Book1_Sample_Format.xlsx");
     }
   </script>
 </body>
